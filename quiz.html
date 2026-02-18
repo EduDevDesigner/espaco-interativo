@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Quiz – Entre Gigantes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== VÍDEO DE FUNDO ===== */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Ajustes específicos para smartphones */
+@media (max-width: 768px) {
+  #bgVideo {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Camada escura para contraste */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0);
+  z-index: -1;
+}
+
+/* ===== ESTILO ORIGINAL ===== */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+}
+
+header {
+  background: rgba(30,30,30,0.9);
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+header p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+#quizBox {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+#moduleTitle {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #f1c40f;
+}
+
+#question {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.option {
+  background: rgba(0, 41, 92, 0.68);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.option:hover {
+  background: rgb(68, 68, 68);
+}
+
+.option.correct {
+  background: #27ae60;
+}
+
+.option.wrong {
+  background: #c0392b;
+}
+
+.option.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+#nextBtn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #f1c40f;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+}
+
+#scoreBox {
+  text-align: center;
+  padding: 30px;
+}
+
+#scoreBox h2 {
+  color: #f1c40f;
+}
+</style>
+</head>
+
+<body>
+
+<!-- VÍDEO DE FUNDO (ADAPTADO PARA MOBILE) -->
+<video
+  id="bgVideo"
+  autoplay
+  muted
+  loop
+  playsinline
+>
+  <source src="Videos/fundo_animado.mp4" type="video/mp4">
+</video>
+
+<div id="overlay"></div>
+
+<header>
+  <h1>Quiz Educativo</h1>
+  <p>Entre Gigantes: A Jornada do Homo sapiens</p>
+</header>
+
+<div id="quizBox">
+  <div id="moduleTitle"></div>
+  <div id="question"></div>
+  <div id="options"></div>
+  <button id="nextBtn">Próxima Pergunta</button>
+</div>
+
+<div id="scoreBox" style="display:none;">
+  <h2>Quiz Finalizado</h2>
+  <p id="scoreText"></p>
+  <p>Anote suas respostas e discuta em sala de aula.</p>
+</div>
+
+<script>
+const quiz = [
+  {
+    modulo: "Módulo 1 – O Pleistoceno",
+    perguntas: [
+      { q: "O que caracteriza o período do Pleistoceno?", o: ["Clima quente e tropical","Eras glaciais e clima frio","Surgimento das primeiras cidades"], c: 1 },
+      { q: "Como o clima influenciava os ecossistemas?", o: ["Não influenciava","Exigia adaptações dos seres vivos","Facilitava a sobrevivência"], c: 1 },
+      { q: "Por que o ambiente é importante para entender a história humana?", o: ["Porque molda a sobrevivência e cultura","Porque é sempre igual","Porque não interfere na vida humana"], c: 0 }
+    ]
+  },
+  {
+    modulo: "Módulo 2 – Megafauna",
+    perguntas: [
+      { q: "O que significa megafauna?", o: ["Animais pequenos","Animais de grande porte","Animais domésticos"], c: 1 },
+      { q: "Qual animal possuía presas longas?", o: ["Mamute","Smilodon","Cervo"], c: 1 },
+      { q: "Como a megafauna influenciava os humanos?", o: ["Era irrelevante","Oferecia recursos e perigos","Servia apenas de paisagem"], c: 1 }
+    ]
+  },
+  {
+    modulo: "Módulo 3 – Homo sapiens",
+    perguntas: [
+      { q: "Uma característica do Homo sapiens é:", o: ["Crânio alongado e baixo","Testa alta e queixo definido","Ausência de linguagem"], c: 1 },
+      { q: "Qual foi um diferencial dessa espécie?", o: ["Força física extrema","Pensamento simbólico","Vida solitária"], c: 1 },
+      { q: "Onde surgiu o Homo sapiens?", o: ["Europa","Ásia","África"], c: 2 }
+    ]
+  },
+  {
+    modulo: "Módulo 4 – Nomadismo",
+    perguntas: [
+      { q: "O que é nomadismo?", o: ["Vida fixa em aldeias","Deslocamento constante","Vida urbana"], c: 1 },
+      { q: "Por que os grupos eram pequenos?", o: ["Falta de comunicação","Facilidade de sobrevivência","Proibição cultural"], c: 1 },
+      { q: "Qual atividade era comum?", o: ["Agricultura","Caça e coleta","Comércio"], c: 1 }
+    ]
+  },
+  {
+    modulo: "Módulo 5 – Tecnologia e Fogo",
+    perguntas: [
+      { q: "Qual material era usado nas ferramentas?", o: ["Plástico","Pedra e osso","Metal"], c: 1 },
+      { q: "O fogo permitiu:", o: ["Apenas iluminação","Cozinhar, aquecer e proteção","Somente rituais"], c: 1 },
+      { q: "As ferramentas ajudavam a:", o: ["Reduzir a cooperação","Aumentar as chances de sobrevivência","Eliminar o nomadismo"], c: 1 }
+    ]
+  },
+  {
+    modulo: "Módulo 6 – Arte Rupestre",
+    perguntas: [
+      { q: "O que é arte rupestre?", o: ["Arte moderna","Pinturas em cavernas","Esculturas em metal"], c: 1 },
+      { q: "Temas comuns eram:", o: ["Cidades","Animais e caça","Escrita"], c: 1 },
+      { q: "A arte indica:", o: ["Apenas decoração","Pensamento simbólico","Desconhecimento do ambiente"], c: 1 }
+    ]
+  },
+  {
+    modulo: "Módulo 7 – Sedentarismo",
+    perguntas: [
+      { q: "O que é sedentarismo?", o: ["Vida em movimento constante","Fixação em um local","Vida solitária"], c: 1 },
+      { q: "O que impulsionou o sedentarismo?", o: ["Agricultura","Caça exclusiva","Mudança de idioma"], c: 0 },
+      { q: "O Neolítico trouxe:", o: ["Fim da cooperação","Crescimento das aldeias","Extinção humana"], c: 1 }
+    ]
+  }
+];
+
+let moduleIndex = 0;
+let questionIndex = 0;
+let score = 0;
+
+const moduleTitle = document.getElementById("moduleTitle");
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const nextBtn = document.getElementById("nextBtn");
+
+function loadQuestion() {
+  const current = quiz[moduleIndex].perguntas[questionIndex];
+  moduleTitle.innerText = quiz[moduleIndex].modulo;
+  questionEl.innerText = current.q;
+  optionsEl.innerHTML = "";
+  nextBtn.style.display = "none";
+
+  current.o.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "option";
+    div.innerText = opt;
+    div.onclick = () => selectOption(div, i);
+    optionsEl.appendChild(div);
+  });
+}
+
+function selectOption(el, index) {
+  const correct = quiz[moduleIndex].perguntas[questionIndex].c;
+  const options = document.querySelectorAll(".option");
+
+  options.forEach((opt, i) => {
+    opt.classList.add("disabled");
+    if (i === correct) opt.classList.add("correct");
+    if (i === index && i !== correct) opt.classList.add("wrong");
+  });
+
+  if (index === correct) score++;
+  nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+  questionIndex++;
+  if (questionIndex >= quiz[moduleIndex].perguntas.length) {
+    moduleIndex++;
+    questionIndex = 0;
+  }
+  if (moduleIndex >= quiz.length) {
+    document.getElementById("quizBox").style.display = "none";
+    document.getElementById("scoreBox").style.display = "block";
+    document.getElementById("scoreText").innerText =
+      `Você acertou ${score} de ${quiz.length * 3} perguntas.`;
+  } else {
+    loadQuestion();
+  }
+};
+
+loadQuestion();
+</script>
+
+</body>
+</html>
