@@ -41,18 +41,21 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  color: #fff;
+  color: #ffffff;
 }
 
+/* 🔽 DESLOCAMENTO VERTICAL */
 header {
-  background: rgba(30,30,30,0.9);
+  background: rgba(1, 15, 33, 0.68);
   padding: 20px;
   text-align: center;
+  margin-top: 20vh;
+    
 }
 
 header h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: 40px;
 }
 
 header p {
@@ -62,33 +65,35 @@ header p {
 }
 
 #quizBox {
-  padding: 20px;
-  max-width: 700px;
-  margin: auto;
+  padding: 50px;
+  max-width: 800px;
+  margin: 20px auto 0 auto;
 }
 
+/* ========================= */
+
 #moduleTitle {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 20px;
   color: #f1c40f;
 }
 
 #question {
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 15px;
 }
 
 .option {
   background: rgba(0, 41, 92, 0.68);
   border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 10px;
+  padding: 22px;
+  margin-bottom: 40px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .option:hover {
-  background: rgb(68, 68, 68);
+  background: rgba(2, 184, 189, 0.5);
 }
 
 .option.correct {
@@ -129,14 +134,8 @@ header p {
 
 <body>
 
-<!-- VÍDEO DE FUNDO (ADAPTADO PARA MOBILE) -->
-<video
-  id="bgVideo"
-  autoplay
-  muted
-  loop
-  playsinline
->
+<!-- VÍDEO DE FUNDO -->
+<video id="bgVideo" autoplay muted playsinline>
   <source src="Videos/fundo_animado.mp4" type="video/mp4">
 </video>
 
