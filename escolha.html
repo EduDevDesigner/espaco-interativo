@@ -57,41 +57,35 @@ html, body {
 /* 🔥 IMAGEM MAIOR (SEM MEXER NOS BOTÕES) */
 .header-image {
   margin-top: -150px;
-
-  width: 85vw;          /* ⬅️ maior */
-  max-width: 480px;     /* ⬅️ bem maior no desktop */
+  width: 85vw;
+  max-width: 480px;
   min-width: 220px;
-
   margin-bottom: 0px;
-
   animation: float 4s ease-in-out infinite;
 }
 
 /* ANIMAÇÃO DE FLUTUAÇÃO */
 @keyframes float {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-18px) rotate(1deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
 /* BOTÕES */
 .card {
   cursor: pointer;
-  padding: 16px 54px;
+  padding: 16px 0;
+  width: 420px;              /* 🔥 TODOS IGUAIS */
+  text-align: center;        /* Centraliza texto */
   background: #ffffff;
   border-radius: 999px;
   border: none;
-  color: #1e90ff;
+  color: #055eb5;
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
+  box-sizing: border-box;
 
   box-shadow:
     0 0 18px rgba(30,144,255,0.6),
@@ -115,8 +109,8 @@ html, body {
 /* RESPONSIVO */
 @media (max-width:768px) {
   .card {
+    width: 360px;
     font-size: 18px;
-    padding: 14px 46px;
   }
 
   .header-image {
@@ -126,8 +120,8 @@ html, body {
 
 @media (max-width:480px) {
   .card {
+    width: 220px;
     font-size: 16px;
-    padding: 12px 38px;
   }
 
   .header-image {
@@ -142,7 +136,7 @@ html, body {
 <!-- FUNDO EM VÍDEO -->
 <div class="background-container" aria-hidden="true">
   <video autoplay muted playsinline>
-    <source src="Videos/escolha.mp4" type="video/mp4">
+    <source src="Videos/fundo_animado.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -157,10 +151,10 @@ html, body {
     <!-- IMAGEM -->
     <img src="Imagens/Byte_02.png" alt="Museu Virtual" class="header-image">
 
-    <button class="card" onclick="location.href='ano6.html'">6º ano</button>
-    <button class="card" onclick="location.href='ano7.html'">7º ano</button>
-    <button class="card" onclick="location.href='ano8.html'">8º ano</button>
-    <button class="card" onclick="location.href='ano9.html'">9º ano</button>
+    <button class="card" onclick="location.href='ano6.html'">6º ano - Explorador</button>
+    <button class="card" onclick="location.href='ano7.html'">7º ano - Investigador</button>
+    <button class="card" onclick="location.href='ano8.html'">8º ano - Analista</button>
+    <button class="card" onclick="location.href='ano9.html'">9º ano - Guardião</button>
 
   </div>
 </div>
