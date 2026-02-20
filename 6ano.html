@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title>Museu</title>
+    <title>Pleistoceno</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+    
+    #track-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #004aadff; /* ← COR DE PRÉ-CARREGAMENTO */
+    color: #ffffff;
+    font-family: 'Changa One', sans-serif;
+    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center; 
+    z-index: 9999;
+  }
+  .hidden {
+    display: none !important;
+  }    
+  </style>    
   </head>
-
   <body>
     
     <!-- 🔹 Mensagem de foco no track -->
