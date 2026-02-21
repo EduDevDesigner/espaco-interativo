@@ -17,7 +17,6 @@
   z-index: -2;
 }
 
-/* Ajustes específicos para smartphones */
 @media (max-width: 768px) {
   #bgVideo {
     object-fit: cover;
@@ -26,7 +25,6 @@
   }
 }
 
-/* Camada escura para contraste */
 #overlay {
   position: fixed;
   top: 0;
@@ -37,20 +35,17 @@
   z-index: -1;
 }
 
-/* ===== ESTILO ORIGINAL ===== */
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
 }
 
-/* 🔽 DESLOCAMENTO VERTICAL */
 header {
   background: rgba(1, 15, 33, 0.9);
   padding: 1px;
   text-align: center;
   margin-top: 10vh;
-    
 }
 
 header h1 {
@@ -72,22 +67,20 @@ header p {
   margin: 0.1px auto 0 auto;
 }
 
-/* ========================= */
-
 #moduleTitle {
   font-size: 20px;
-  font-weight: bold;    /* 🔥 NEGRITO AQUI */
+  font-weight: bold;
   margin-bottom: 20px;
   color: #edf10f;
-  text-shadow: 2px 2px 1px rgba(0,0,0,1), 0 0 1px rgba(0,0,0,0.9);
+  text-shadow: 2px 2px 1px rgba(0,0,0,1);
   text-align: center;
 }
 
 #question {
   font-size: 18px;
   margin-bottom: 15px;
-  font-weight: bold;    /* 🔥 NEGRITO AQUI */
-  text-shadow: 2px 2px 1px rgba(0,0,0,1), 2px 2px 1px rgba(0,0,0,0.9);
+  font-weight: bold;
+  text-shadow: 2px 2px 1px rgba(0,0,0,1);
   text-align: center;
 }
 
@@ -98,28 +91,14 @@ header p {
   margin-bottom: 20px;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 15px; /* 🔥 AQUI você aumenta */
-  font-weight: bold;    /* 🔥 NEGRITO AQUI */
-  text-shadow: 
-    2px 2px 1px rgba(0,0,0,1), 0 0 1px rgba(0,0,0,0.9);
+  font-size: 15px;
+  font-weight: bold;
 }
 
-.option:hover {
-  background: rgba(2, 184, 189, 0.5);
-}
-
-.option.correct {
-  background: #00ff6b;
-}
-
-.option.wrong {
-  background: #ff1800;
-}
-
-.option.disabled {
-  pointer-events: none;
-  opacity: 0.8;
-}
+.option:hover { background: rgba(2, 184, 189, 0.5); }
+.option.correct { background: #00ff6b; }
+.option.wrong { background: #ff1800; }
+.option.disabled { pointer-events: none; opacity: 0.8; }
 
 #nextBtn {
   margin-top: 15px;
@@ -129,7 +108,7 @@ header p {
   border: none;
   border-radius: 6px;
   font-size: 20px;
-  font-weight: bold;    /* 🔥 NEGRITO AQUI */
+  font-weight: bold;
   cursor: pointer;
   display: none;
 }
@@ -137,62 +116,44 @@ header p {
 #scoreBox {
   text-align: center;
   padding: 50px;
-  font-size: 18px; /* 🔥 AQUI você aumenta */
-  font-weight: bold;    /* 🔥 NEGRITO AQUI */
-  text-shadow: 
-    2px 2px 1px rgba(0,0,0,1), 0 0 1px rgba(0,0,0,0.9);
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #scoreBox h2 {
-  font-size: 25px; /* 🔥 AQUI você aumenta */
+  font-size: 25px;
   color: #e7ff0a;
-  font-weight: bold;    /* 🔥 NEGRITO AQUI */
-  text-shadow: 
-    2px 2px 1px rgba(0,0,0,1), 0 0 1px rgba(0,0,0,0.9);
 }
-  
-/* 🔹 POSICIONAMENTO DA NAVE */
-  .nave-img {
-    position: absolute;
-    top: 10%;
-    right: 5%;
-    width: 90px;
-    z-index: 1;
-    animation: flutuar 4s ease-in-out infinite;
-  }  
-  
-  /* 🔹 ANIMAÇÃO DE FLUTUAÇÃO */
-  @keyframes flutuar {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
-  }
-  
+
+.nave-img {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 90px;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
 </style>
 </head>
 
 <body>
 
-<!-- VÍDEO DE FUNDO -->
 <video id="bgVideo" autoplay muted playsinline>
   <source src="Videos/fundo_animado2.mp4" type="video/mp4">
 </video>
 
 <div id="overlay"></div>
-  
-  <!-- 🔊 ÁUDIOS ADICIONADOS -->
+
 <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
 <audio id="audioErro" src="Audios/erro.mp3"></audio>
 
-<!-- IMAGEM -->
 <img src="Imagens/voando.png" alt="nave" class="nave-img">  
-  
+
 <header>
   <h1>Quiz Educativo</h1>
   <p>Entre Gigantes<br> A Jornada do Homo sapiens</p>
@@ -213,67 +174,85 @@ header p {
 
 <script>
 const quiz = [
-  {
-    modulo: "Módulo 1 – O Pleistoceno",
-    perguntas: [
-      { q: "O que caracteriza o período do Pleistoceno?", o: ["Clima quente e tropical","Eras glaciais e clima frio","Surgimento das primeiras cidades"], c: 1 },
-      { q: "Como o clima influenciava os ecossistemas?", o: ["Não influenciava","Exigia adaptações dos seres vivos","Facilitava a sobrevivência"], c: 1 },
-      { q: "Por que o ambiente é importante para entender a história humana?", o: ["Porque molda a sobrevivência e cultura","Porque é sempre igual","Porque não interfere na vida humana"], c: 0 }
-    ]
-  },
-  {
-    modulo: "Módulo 2 – Megafauna",
-    perguntas: [
-      { q: "O que significa megafauna?", o: ["Animais pequenos","Animais de grande porte","Animais domésticos"], c: 1 },
-      { q: "Qual animal possuía presas longas?", o: ["Mamute","Smilodon","Cervo"], c: 1 },
-      { q: "Como a megafauna influenciava os humanos?", o: ["Era irrelevante","Oferecia recursos e perigos","Servia apenas de paisagem"], c: 1 }
-    ]
-  },
-  {
-    modulo: "Módulo 3 – Homo sapiens",
-    perguntas: [
-      { q: "Uma característica do Homo sapiens é:", o: ["Crânio alongado e baixo","Testa alta e queixo definido","Ausência de linguagem"], c: 1 },
-      { q: "Qual foi um diferencial dessa espécie?", o: ["Força física extrema","Pensamento simbólico","Vida solitária"], c: 1 },
-      { q: "Onde surgiu o Homo sapiens?", o: ["Europa","Ásia","África"], c: 2 }
-    ]
-  },
-  {
-    modulo: "Módulo 4 – Nomadismo",
-    perguntas: [
-      { q: "O que é nomadismo?", o: ["Vida fixa em aldeias","Deslocamento constante","Vida urbana"], c: 1 },
-      { q: "Por que os grupos eram pequenos?", o: ["Falta de comunicação","Facilidade de sobrevivência","Proibição cultural"], c: 1 },
-      { q: "Qual atividade era comum?", o: ["Agricultura","Caça e coleta","Comércio"], c: 1 }
-    ]
-  },
-  {
-    modulo: "Módulo 5 – Tecnologia e Fogo",
-    perguntas: [
-      { q: "Qual material era usado nas ferramentas?", o: ["Plástico","Pedra e osso","Metal"], c: 1 },
-      { q: "O fogo permitiu:", o: ["Apenas iluminação","Cozinhar, aquecer e proteção","Somente rituais"], c: 1 },
-      { q: "As ferramentas ajudavam a:", o: ["Reduzir a cooperação","Aumentar as chances de sobrevivência","Eliminar o nomadismo"], c: 1 }
-    ]
-  },
-  {
-    modulo: "Módulo 6 – Arte Rupestre",
-    perguntas: [
-      { q: "O que é arte rupestre?", o: ["Arte moderna","Pinturas em cavernas","Esculturas em metal"], c: 1 },
-      { q: "Temas comuns eram:", o: ["Cidades","Animais e caça","Escrita"], c: 1 },
-      { q: "A arte indica:", o: ["Apenas decoração","Pensamento simbólico","Desconhecimento do ambiente"], c: 1 }
-    ]
-  },
-  {
-    modulo: "Módulo 7 – Sedentarismo",
-    perguntas: [
-      { q: "O que é sedentarismo?", o: ["Vida em movimento constante","Fixação em um local","Vida solitária"], c: 1 },
-      { q: "O que impulsionou o sedentarismo?", o: ["Agricultura","Caça exclusiva","Mudança de idioma"], c: 0 },
-      { q: "O Neolítico trouxe:", o: ["Fim da cooperação","Crescimento das aldeias","Extinção humana"], c: 1 }
-    ]
-  }
+
+{
+  modulo: "Módulo 1 – O Pleistoceno",
+  perguntas: [
+    { q: "O que caracteriza o período do Pleistoceno?", o: ["Clima quente e tropical","Eras glaciais e clima frio","Surgimento das primeiras cidades"], c: 1 },
+    { q: "Como o clima influenciava os ecossistemas?", o: ["Não influenciava","Exigia adaptações dos seres vivos","Facilitava a sobrevivência"], c: 1 },
+    { q: "Por que o ambiente é importante para entender a história humana?", o: ["Porque molda a sobrevivência e cultura","Porque é sempre igual","Porque não interfere na vida humana"], c: 0 }
+  ]
+},
+
+{
+  modulo: "Módulo 2 – O Paleolítico",
+  perguntas: [
+    { q: "Qual é a diferença entre Pleistoceno e Paleolítico?", o: ["Um é período geológico e outro histórico-cultural","São o mesmo período","Ambos são períodos agrícolas"], c: 0 },
+    { q: "Quais são as três fases do Paleolítico?", o: ["Inferior, Médio e Superior","Antigo, Clássico e Moderno","Pedra, Bronze e Ferro"], c: 0 },
+    { q: "Por que o Paleolítico foi tão longo?", o: ["Durou milhões de anos","Durou apenas alguns séculos","Durou menos que o Neolítico"], c: 0 }
+  ]
+},
+
+{
+  modulo: "Módulo 3 – Megafauna",
+  perguntas: [
+    { q: "O que significa megafauna?", o: ["Animais pequenos","Animais de grande porte","Animais domésticos"], c: 1 },
+    { q: "Qual animal possuía presas longas?", o: ["Mamute","Smilodon","Cervo"], c: 1 },
+    { q: "Como a megafauna influenciava os humanos?", o: ["Era irrelevante","Oferecia recursos e perigos","Servia apenas de paisagem"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Módulo 4 – Homo sapiens",
+  perguntas: [
+    { q: "Uma característica do Homo sapiens é:", o: ["Crânio alongado e baixo","Testa alta e queixo definido","Ausência de linguagem"], c: 1 },
+    { q: "Qual foi um diferencial dessa espécie?", o: ["Força física extrema","Pensamento simbólico","Vida solitária"], c: 1 },
+    { q: "Onde surgiu o Homo sapiens?", o: ["Europa","Ásia","África"], c: 2 }
+  ]
+},
+
+{
+  modulo: "Módulo 5 – Nomadismo",
+  perguntas: [
+    { q: "O que é nomadismo?", o: ["Vida fixa em aldeias","Deslocamento constante","Vida urbana"], c: 1 },
+    { q: "Por que os grupos eram pequenos?", o: ["Falta de comunicação","Facilidade de sobrevivência","Proibição cultural"], c: 1 },
+    { q: "Qual atividade era comum?", o: ["Agricultura","Caça e coleta","Comércio"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Módulo 6 – Tecnologia e Fogo",
+  perguntas: [
+    { q: "Qual material era usado nas ferramentas?", o: ["Plástico","Pedra e osso","Metal"], c: 1 },
+    { q: "O fogo permitiu:", o: ["Apenas iluminação","Cozinhar, aquecer e proteção","Somente rituais"], c: 1 },
+    { q: "As ferramentas ajudavam a:", o: ["Reduzir a cooperação","Aumentar as chances de sobrevivência","Eliminar o nomadismo"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Módulo 7 – Arte Rupestre",
+  perguntas: [
+    { q: "O que é arte rupestre?", o: ["Arte moderna","Pinturas em cavernas","Esculturas em metal"], c: 1 },
+    { q: "Temas comuns eram:", o: ["Cidades","Animais e caça","Escrita"], c: 1 },
+    { q: "A arte indica:", o: ["Apenas decoração","Pensamento simbólico","Desconhecimento do ambiente"], c: 1 }
+  ]
+},
+
+{
+  modulo: "Módulo 8 – O Neolítico",
+  perguntas: [
+    { q: "O que é sedentarismo?", o: ["Vida em movimento constante","Fixação em um local","Vida solitária"], c: 1 },
+    { q: "Como a agricultura transformou a vida humana?", o: ["Permitiu aldeias permanentes","Eliminou o trabalho","Impediu o crescimento populacional"], c: 0 },
+    { q: "Por que o Neolítico é considerado uma revolução?", o: ["Mudou a organização social","Não trouxe mudanças","Extinguiu a humanidade"], c: 0 }
+  ]
+}
+
 ];
 
 let moduleIndex = 0;
 let questionIndex = 0;
 let score = 0;
+let questionNumber = 1;
 
 const moduleTitle = document.getElementById("moduleTitle");
 const questionEl = document.getElementById("question");
@@ -283,14 +262,16 @@ const nextBtn = document.getElementById("nextBtn");
 function loadQuestion() {
   const current = quiz[moduleIndex].perguntas[questionIndex];
   moduleTitle.innerText = quiz[moduleIndex].modulo;
-  questionEl.innerText = current.q;
+  questionEl.innerText = questionNumber + ") " + current.q;
   optionsEl.innerHTML = "";
   nextBtn.style.display = "none";
+
+  const letters = ["A", "B", "C"];
 
   current.o.forEach((opt, i) => {
     const div = document.createElement("div");
     div.className = "option";
-    div.innerText = opt;
+    div.innerText = letters[i] + ") " + opt;
     div.onclick = () => selectOption(div, i);
     optionsEl.appendChild(div);
   });
@@ -309,10 +290,10 @@ function selectOption(el, index) {
   if (index === correct) {
     score++;
     audioAcerto.currentTime = 0;
-    audioAcerto.play();   // 🔊 toca som de acerto
+    audioAcerto.play();
   } else {
     audioErro.currentTime = 0;
-    audioErro.play();     // 🔊 toca som de erro
+    audioErro.play();
   }
 
   nextBtn.style.display = "block";
@@ -320,10 +301,13 @@ function selectOption(el, index) {
 
 nextBtn.onclick = () => {
   questionIndex++;
+  questionNumber++;
+
   if (questionIndex >= quiz[moduleIndex].perguntas.length) {
     moduleIndex++;
     questionIndex = 0;
   }
+
   if (moduleIndex >= quiz.length) {
     document.getElementById("quizBox").style.display = "none";
     document.getElementById("scoreBox").style.display = "block";
