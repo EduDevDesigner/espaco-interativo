@@ -33,56 +33,55 @@
   }
 
   .container {
-  position: absolute;
-  top: 68%; /* controla altura exata */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
   }
 
   .login-box {
-  background: rgba(2, 6, 40, 0.69);
-  padding: 25px;          /* antes 40px */
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
-  text-align: center; 
- 
-  width: 260px;           /* antes 320px */
-}
+    background: rgba(2, 6, 40, 0.69);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    text-align: center; 
+    width: 260px;
+  }
 
-.login-box h2 {
-  margin-bottom: 15px;    /* antes 20px */
-  letter-spacing: 2px;
-  font-size: 18px;        /* menor */
-   color: #07dcff;
-  text-shadow: 1px 1px 10px rgb(0, 233, 255), 1px 1px 10px rgba(0, 233, 255, 0.9);
-}
+  .login-box h2 {
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    font-size: 18px;
+    color: #07dcff;
+    text-shadow: 1px 1px 10px rgb(0, 233, 255), 1px 1px 10px rgba(0, 233, 255, 0.9);
+  }
 
-.login-box input {
-  width: 100%;
-  padding: 10px;          /* antes 12px */
-  margin: 8px 0;          /* antes 10px */
-  border-radius: 25px;
-  border: none;
-  outline: none;
-  text-align: center;
-  font-size: 16px;        /* antes 20px */
-  font-weight: bold;
-}
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
 
-.login-box button {
-  cursor: pointer;
-  padding: 10px 30px;     /* antes 12px 40px */
-  background: #ffffff;
-  border-radius: 999px;
-  border: none;    
-  font-size: 14px;        /* antes 16px */
-  font-weight: bold;
-  color: #0363c1;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-top: 12px;
-}
+  .login-box button {
+    cursor: pointer;
+    padding: 10px 30px;
+    background: #ffffff;
+    border-radius: 999px;
+    border: none;    
+    font-size: 14px;
+    font-weight: bold;
+    color: #0363c1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
 
   .error {
     color: #ff4d4d;
@@ -90,13 +89,37 @@
     font-weight: bold;
     margin-top: 10px;
   }
+
+  /* 🔹 POSICIONAMENTO DA NAVE */
+  .nave-img {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 150px;
+    z-index: 1;
+    animation: flutuar 4s ease-in-out infinite;
+  }
+
+  /* 🔹 ANIMAÇÃO DE FLUTUAÇÃO */
+  @keyframes flutuar {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
 </style>
 </head>
 
 <body>
 
 <div class="background-container">
-  <video autoplay muted  playsinline>
+  <video autoplay muted playsinline>
     <source src="Videos/Fundo_login.mp4" type="video/mp4">
   </video>
 </div>
@@ -104,6 +127,9 @@
 <audio id="bg-audio" autoplay loop muted>
   <source src="Audios/baroque.mp3" type="audio/mpeg">
 </audio>
+
+<!-- IMAGEM -->
+<img src="Imagens/nave.png" alt="nave" class="nave-img">
 
 <div class="container">
   <div class="login-box">
@@ -131,7 +157,6 @@
     const pass = document.getElementById("password").value;
     const errorMsg = document.getElementById("error-msg");
 
-    // 👇 Usuário e senha definidos
     const validUser = "aluno";
     const validPass = "1234";
 
