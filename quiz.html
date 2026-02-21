@@ -142,6 +142,30 @@ header p {
 #scoreBox h2 {
   color: #f1d80f;
 }
+  
+/* 🔹 POSICIONAMENTO DA NAVE */
+  .nave-img {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 120px;
+    z-index: 1;
+    animation: flutuar 4s ease-in-out infinite;
+  }  
+  
+  /* 🔹 ANIMAÇÃO DE FLUTUAÇÃO */
+  @keyframes flutuar {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
 </style>
 </head>
 
@@ -158,6 +182,9 @@ header p {
 <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
 <audio id="audioErro" src="Audios/erro.mp3"></audio>
 
+<!-- IMAGEM -->
+<img src="Imagens/voando.png" alt="nave" class="nave-img">  
+  
 <header>
   <h1>Quiz Educativo</h1>
   <p>Entre Gigantes<br> A Jornada do Homo sapiens</p>
