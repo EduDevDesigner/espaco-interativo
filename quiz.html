@@ -113,11 +113,17 @@ header p {
 #scoreBox {
   text-align: center;
   padding: 50px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
 }
 
-#scoreBox h2 { font-size: 25px; color: #e7ff0a; }
+#scoreBox h2 { 
+  font-size: 25px; 
+  color: #e7ff0a;
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+
+}
 
 .report-line {
   margin: 8px 0;
@@ -126,9 +132,23 @@ header p {
 #generatePdf {
   margin-top: 20px;
   padding: 10px 20px;
+  color: #0a6fff;
   font-weight: bold;
   cursor: pointer;
+  border: none;
+  border-radius: 18px;
+  
 }
+  
+.nave-img { 
+  position: absolute; 
+  top: 10%; 
+  right: 5%; 
+  width: 90px;
+  
+  animation: flutuar 4s ease-in-out infinite; } 
+  @keyframes flutuar { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+  
 </style>
 </head>
 
@@ -142,6 +162,8 @@ header p {
 
 <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
 <audio id="audioErro" src="Audios/erro.mp3"></audio>
+  
+<img src="Imagens/voando.png" alt="nave" class="nave-img">  
 
 <header>
   <h1>Quiz Educativo</h1>
