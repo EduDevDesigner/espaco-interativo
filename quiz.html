@@ -5,6 +5,8 @@
 <title>Quiz – Entre Gigantes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 /* ===== VÍDEO DE FUNDO ===== */
 #bgVideo {
@@ -48,17 +50,14 @@ header {
   margin-top: 10vh;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 35px;
-}
+header h1 { margin: 0; font-size: 35px; }
 
 header p {
   margin-top: 1px;
   font-size: 18px;
   font-weight: bold;
   color: #00e8ff; 
-  text-shadow: 1px 1px 10px rgb(0, 233, 255), 1px 1px 10px rgba(0, 233, 255, 0.9);
+  text-shadow: 1px 1px 10px rgb(0, 233, 255);
 }
 
 #quizBox {
@@ -72,7 +71,6 @@ header p {
   font-weight: bold;
   margin-bottom: 20px;
   color: #edf10f;
-  text-shadow: 2px 2px 1px rgba(0,0,0,1);
   text-align: center;
 }
 
@@ -80,7 +78,6 @@ header p {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: bold;
-  text-shadow: 2px 2px 1px rgba(0,0,0,1);
   text-align: center;
 }
 
@@ -120,23 +117,17 @@ header p {
   font-weight: bold;
 }
 
-#scoreBox h2 {
-  font-size: 25px;
-  color: #e7ff0a;
+#scoreBox h2 { font-size: 25px; color: #e7ff0a; }
+
+.report-line {
+  margin: 8px 0;
 }
 
-.nave-img {
-  position: absolute;
-  top: 10%;
-  right: 5%;
-  width: 90px;
-  animation: flutuar 4s ease-in-out infinite;
-}
-
-@keyframes flutuar {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+#generatePdf {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -152,8 +143,6 @@ header p {
 <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
 <audio id="audioErro" src="Audios/erro.mp3"></audio>
 
-<img src="Imagens/voando.png" alt="nave" class="nave-img">  
-
 <header>
   <h1>Quiz Educativo</h1>
   <p>Entre Gigantes<br> A Jornada do Homo sapiens</p>
@@ -167,13 +156,20 @@ header p {
 </div>
 
 <div id="scoreBox" style="display:none;">
-  <h2>Quiz Finalizado</h2>
+  <h2>Relatório do Aluno</h2>
+  <input type="text" id="studentName" placeholder="Nome do aluno"><br><br>
   <p id="scoreText"></p>
-  <p>Anote suas respostas e discuta em sala de aula.</p>
+  <div id="moduleReport"></div>
+  <button id="generatePdf">Gerar PDF</button>
 </div>
 
 <script>
-const quiz = [
+const quiz = [...document.currentScript.previousElementSibling ? [] : []];
+</script>
+
+<script>
+// ===== QUIZ ORIGINAL =====
+const quizData = [
 
 {
   modulo: "Módulo 1 – O Pleistoceno",
@@ -253,6 +249,7 @@ let moduleIndex = 0;
 let questionIndex = 0;
 let score = 0;
 let questionNumber = 1;
+let moduleScores = new Array(quizData.length).fill(0);
 
 const moduleTitle = document.getElementById("moduleTitle");
 const questionEl = document.getElementById("question");
@@ -260,8 +257,8 @@ const optionsEl = document.getElementById("options");
 const nextBtn = document.getElementById("nextBtn");
 
 function loadQuestion() {
-  const current = quiz[moduleIndex].perguntas[questionIndex];
-  moduleTitle.innerText = quiz[moduleIndex].modulo;
+  const current = quizData[moduleIndex].perguntas[questionIndex];
+  moduleTitle.innerText = quizData[moduleIndex].modulo;
   questionEl.innerText = questionNumber + ") " + current.q;
   optionsEl.innerHTML = "";
   nextBtn.style.display = "none";
@@ -278,7 +275,7 @@ function loadQuestion() {
 }
 
 function selectOption(el, index) {
-  const correct = quiz[moduleIndex].perguntas[questionIndex].c;
+  const correct = quizData[moduleIndex].perguntas[questionIndex].c;
   const options = document.querySelectorAll(".option");
 
   options.forEach((opt, i) => {
@@ -289,10 +286,9 @@ function selectOption(el, index) {
 
   if (index === correct) {
     score++;
-    audioAcerto.currentTime = 0;
+    moduleScores[moduleIndex]++;
     audioAcerto.play();
   } else {
-    audioErro.currentTime = 0;
     audioErro.play();
   }
 
@@ -303,19 +299,46 @@ nextBtn.onclick = () => {
   questionIndex++;
   questionNumber++;
 
-  if (questionIndex >= quiz[moduleIndex].perguntas.length) {
+  if (questionIndex >= quizData[moduleIndex].perguntas.length) {
     moduleIndex++;
     questionIndex = 0;
   }
 
-  if (moduleIndex >= quiz.length) {
+  if (moduleIndex >= quizData.length) {
     document.getElementById("quizBox").style.display = "none";
     document.getElementById("scoreBox").style.display = "block";
+
     document.getElementById("scoreText").innerText =
-      `Você acertou ${score} de ${quiz.length * 3} perguntas.`;
+      `Você acertou ${score} de ${quizData.length * 3} perguntas.`;
+
+    const reportDiv = document.getElementById("moduleReport");
+    reportDiv.innerHTML = "";
+
+    quizData.forEach((mod, i) => {
+      reportDiv.innerHTML += `<div class="report-line">${mod.modulo}: ${moduleScores[i]} de 3 acertos</div>`;
+    });
+
   } else {
     loadQuestion();
   }
+};
+
+document.getElementById("generatePdf").onclick = function() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const name = document.getElementById("studentName").value;
+
+  doc.text("Relatório - Entre Gigantes", 20, 20);
+  doc.text("Aluno: " + name, 20, 30);
+  doc.text(`Resultado: ${score} de ${quizData.length * 3}`, 20, 40);
+
+  let y = 50;
+  quizData.forEach((mod, i) => {
+    doc.text(`${mod.modulo}: ${moduleScores[i]} de 3`, 20, y);
+    y += 10;
+  });
+
+  doc.save("relatorio_quiz.pdf");
 };
 
 loadQuestion();
