@@ -111,13 +111,24 @@ header p {
 }
 
 #scoreBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   text-align: center;
-  padding: 50px;
-  font-size: 15px;
+  padding: 20px;
+  font-size: 14px;
   font-weight: bold;
   text-shadow: 1px 1px 1px rgb(0, 0, 0);
-}
 
+  background: rgba(1, 4, 23, 0.85);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+
+  width: 320px;
+  max-width: 90%;
+}
 #scoreBox h2 { 
   font-size: 25px; 
   color: #e7ff0a;
