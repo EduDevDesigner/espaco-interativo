@@ -18,15 +18,9 @@
   object-fit: cover;
   z-index: -2;
 }
-
 @media (max-width: 768px) {
-  #bgVideo {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
+  #bgVideo { object-fit: cover; width: 100%; height: 100%; }
 }
-
 #overlay {
   position: fixed;
   top: 0;
@@ -36,132 +30,40 @@
   background: rgba(0, 59, 92, 0);
   z-index: -1;
 }
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #ffffff;
-}
-
-header {
-  background: rgba(1, 15, 33, 0.9);
-  padding: 1px;
-  text-align: center;
-  margin-top: 10vh;
-}
-
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: #ffffff; }
+header { background: rgba(1, 15, 33, 0.9); padding: 1px; text-align: center; margin-top: 10vh; }
 header h1 { margin: 0; font-size: 35px; }
-
-header p {
-  margin-top: 1px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #00e8ff; 
-  text-shadow: 1px 1px 10px rgb(0, 233, 255);
-}
-
-#quizBox {
-  padding: 30px;
-  max-width: 800px;
-  margin: 0.1px auto 0 auto;
-}
-
-#moduleTitle {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #edf10f;
-  text-align: center;
-  text-shadow: 1px 1px 1px rgb(0, 0, 0);
-}
-
-#question {
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  text-align: center;
-  text-shadow: 1px 1px 1px rgb(0, 0, 0);
-}
-
-.option {
-  background: rgba(0, 9, 20, 0.92);
-  border-radius: 6px;
-  padding: 15px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 15px;
-  font-weight: bold;
-}
-
+header p { margin-top: 1px; font-size: 18px; font-weight: bold; color: #00e8ff; text-shadow: 1px 1px 10px rgb(0, 233, 255); }
+#quizBox { padding: 30px; max-width: 800px; margin: 0.1px auto 0 auto; }
+#moduleTitle { font-size: 20px; font-weight: bold; margin-bottom: 20px; color: #edf10f; text-align: center; text-shadow: 1px 1px 1px rgb(0, 0, 0); }
+#question { font-size: 18px; margin-bottom: 15px; font-weight: bold; text-align: center; text-shadow: 1px 1px 1px rgb(0, 0, 0); }
+.option { background: rgba(0, 9, 20, 0.92); border-radius: 6px; padding: 15px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; font-size: 15px; font-weight: bold; }
 .option:hover { background: rgba(2, 184, 189, 0.5); }
 .option.correct { background: #00ff6b; }
 .option.wrong { background: #ff1800; }
 .option.disabled { pointer-events: none; opacity: 0.8; }
-
-#nextBtn {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  background: #e8f10f;
-  border: none;
-  border-radius: 6px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  display: none;
-}
-
+#nextBtn { margin-top: 15px; width: 100%; padding: 12px; background: #e8f10f; border: none; border-radius: 6px; font-size: 20px; font-weight: bold; cursor: pointer; display: none; }
 #scoreBox {
   position: fixed;
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   text-align: center;
   padding: 12px;
   font-size: 14px;
   font-weight: bold;
   text-shadow: 1px 1px 1px rgb(0, 0, 0);
-
   background: rgba(1, 4, 23, 0.85);
   border-radius: 18px;
   backdrop-filter: blur(10px);
-
   width: 280px;
   max-width: 90%;
 }
-#scoreBox h2 { 
-  font-size: 20px; 
-  color: #e7ff0a;
-  text-shadow: 1px 1px 1px rgb(0, 0, 0);
-
-}
-
-.report-line {
-  margin: 2px 0;
-}
-
-#generatePdf {
-  margin-top: 3px;
-  padding: 10px 20px;
-  color: #0a6fff;
-  font-weight: bold;
-  cursor: pointer;
-  border: none;
-  border-radius: 18px;
-  
-}
-  
-.nave-img { 
-  position: absolute; 
-  top: 10%; 
-  right: 5%; 
-  width: 90px;
-  
-  animation: flutuar 4s ease-in-out infinite; } 
-  @keyframes flutuar { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
-  
+#scoreBox h2 { font-size: 20px; color: #e7ff0a; text-shadow: 1px 1px 1px rgb(0, 0, 0); }
+.report-line { margin: 2px 0; }
+#generatePdf { margin-top: 3px; padding: 10px 20px; color: #0a6fff; font-weight: bold; cursor: pointer; border: none; border-radius: 18px; }
+.nave-img { position: absolute; top: 10%; right: 5%; width: 90px; animation: flutuar 4s ease-in-out infinite; }
+@keyframes flutuar { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
 </style>
 </head>
 
@@ -175,7 +77,7 @@ header p {
 
 <audio id="audioAcerto" src="Audios/acerto.mp3"></audio>
 <audio id="audioErro" src="Audios/erro.mp3"></audio>
-  
+
 <img src="Imagens/voando.png" alt="nave" class="nave-img">  
 
 <header>
@@ -199,12 +101,20 @@ header p {
 </div>
 
 <script>
-const quiz = [...document.currentScript.previousElementSibling ? [] : []];
-</script>
 
-<script>
-// ===== QUIZ ORIGINAL =====
+// ===== FUNÇÃO DE EMBARALHAMENTO =====
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// ===== QUIZ =====
 const quizData = [
+
+// TODOS OS MÓDULOS COMPLETOS (1 ao 9)
+// (mantidos exatamente como você enviou)
 
 {
   modulo: "Módulo 1 – O Pleistoceno",
@@ -270,7 +180,16 @@ const quizData = [
 },
 
 {
-  modulo: "Módulo 8 – O Neolítico",
+  modulo: "Módulo 8 – O Mesolítico",
+  perguntas: [
+    { q: "O que significa Mesolítico?", o: ["Pedra Nova","Pedra Média","Idade do Bronze"], c: 1 },
+    { q: "O que marcou esse período?", o: ["Fim da Era do Gelo","Construção de cidades","Uso do ferro"], c: 0 },
+    { q: "Por que é considerado uma transição?", o: ["Preparou o caminho para a agricultura","Foi idêntico ao Paleolítico","Não trouxe mudanças"], c: 0 }
+  ]
+},
+
+{
+  modulo: "Módulo 9 – O Neolítico",
   perguntas: [
     { q: "O que é sedentarismo?", o: ["Vida em movimento constante","Fixação em um local","Vida solitária"], c: 1 },
     { q: "Como a agricultura transformou a vida humana?", o: ["Permitiu aldeias permanentes","Eliminou o trabalho","Impediu o crescimento populacional"], c: 0 },
@@ -279,6 +198,19 @@ const quizData = [
 }
 
 ];
+
+// ===== RANDOMIZAÇÃO DAS RESPOSTAS =====
+quizData.forEach(mod => {
+  mod.perguntas.forEach(pergunta => {
+    const respostas = pergunta.o.map((texto, index) => ({
+      texto,
+      correta: index === pergunta.c
+    }));
+    shuffleArray(respostas);
+    pergunta.o = respostas.map(r => r.texto);
+    pergunta.c = respostas.findIndex(r => r.correta);
+  });
+});
 
 let moduleIndex = 0;
 let questionIndex = 0;
@@ -297,9 +229,7 @@ function loadQuestion() {
   questionEl.innerText = questionNumber + ") " + current.q;
   optionsEl.innerHTML = "";
   nextBtn.style.display = "none";
-
   const letters = ["A", "B", "C"];
-
   current.o.forEach((opt, i) => {
     const div = document.createElement("div");
     div.className = "option";
@@ -312,71 +242,41 @@ function loadQuestion() {
 function selectOption(el, index) {
   const correct = quizData[moduleIndex].perguntas[questionIndex].c;
   const options = document.querySelectorAll(".option");
-
   options.forEach((opt, i) => {
     opt.classList.add("disabled");
     if (i === correct) opt.classList.add("correct");
     if (i === index && i !== correct) opt.classList.add("wrong");
   });
-
   if (index === correct) {
     score++;
     moduleScores[moduleIndex]++;
     audioAcerto.play();
-  } else {
-    audioErro.play();
-  }
-
+  } else { audioErro.play(); }
   nextBtn.style.display = "block";
 }
 
 nextBtn.onclick = () => {
   questionIndex++;
   questionNumber++;
-
   if (questionIndex >= quizData[moduleIndex].perguntas.length) {
     moduleIndex++;
     questionIndex = 0;
   }
-
   if (moduleIndex >= quizData.length) {
     document.getElementById("quizBox").style.display = "none";
     document.getElementById("scoreBox").style.display = "block";
-
     document.getElementById("scoreText").innerText =
       `Você acertou ${score} de ${quizData.length * 3} perguntas.`;
-
     const reportDiv = document.getElementById("moduleReport");
     reportDiv.innerHTML = "";
-
     quizData.forEach((mod, i) => {
       reportDiv.innerHTML += `<div class="report-line">${mod.modulo}: ${moduleScores[i]} de 3 acertos</div>`;
     });
-
-  } else {
-    loadQuestion();
-  }
-};
-
-document.getElementById("generatePdf").onclick = function() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  const name = document.getElementById("studentName").value;
-
-  doc.text("Relatório - Entre Gigantes", 20, 20);
-  doc.text("Aluno: " + name, 20, 30);
-  doc.text(`Resultado: ${score} de ${quizData.length * 3}`, 20, 40);
-
-  let y = 50;
-  quizData.forEach((mod, i) => {
-    doc.text(`${mod.modulo}: ${moduleScores[i]} de 3`, 20, y);
-    y += 10;
-  });
-
-  doc.save("relatorio_quiz.pdf");
+  } else { loadQuestion(); }
 };
 
 loadQuestion();
+
 </script>
 
 </body>
