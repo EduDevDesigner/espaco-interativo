@@ -6,166 +6,201 @@
 <title>Login - Espaço Interativo XR</title>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Orbitron', sans-serif;
+
+/* ===== MOBILE PADRÃO ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  background: #001c40ff;
+  color: #fff;
+}
+
+/* APP WRAPPER (controla mobile vs desktop) */
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== DESKTOP CENTRALIZADO ===== */
+@media (min-width: 768px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #001c40ff;
-    color: #fff;
   }
 
-  .background-container {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    background: #001c40ff;
-    z-index: 0;
+  .app-wrapper {
+    width: 390px;
+    height: 844px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
   }
+}
 
-  .background-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.03);
-  }
+/* ===== FUNDO ===== */
+.background-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #001c40ff;
+  z-index: 0;
+}
 
-  .container {
-    position: absolute;
-    top: 68%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-  }
+.background-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+}
 
+/* ===== CONTAINER LOGIN ===== */
+.container {
+  position: absolute;
+  top: 68%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.login-box {
+  background: rgba(2, 6, 40, 0.69);
+  padding: 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  text-align: center; 
+  width: 260px;
+}
+
+.login-box h2 {
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  font-size: 18px;
+  color: #07dcff;
+  text-shadow: 1px 1px 10px rgb(0, 233, 255), 1px 1px 10px rgba(0, 233, 255, 0.9);
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.login-box button {
+  cursor: pointer;
+  padding: 10px 30px;
+  background: #ffffff;
+  border-radius: 999px;
+  border: none;    
+  font-size: 14px;
+  font-weight: bold;
+  color: #0363c1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ===== NAVE ===== */
+.nave-img {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 120px;
+  z-index: 1;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width:480px) {
   .login-box {
-    background: rgba(2, 6, 40, 0.69);
-    padding: 25px;
-    border-radius: 18px;
-    backdrop-filter: blur(10px);
-    text-align: center; 
-    width: 260px;
+    width: 80%;
   }
 
-  .login-box h2 {
-    margin-bottom: 15px;
-    letter-spacing: 2px;
-    font-size: 18px;
-    color: #07dcff;
-    text-shadow: 1px 1px 10px rgb(0, 233, 255), 1px 1px 10px rgba(0, 233, 255, 0.9);
-  }
-
-  .login-box input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  .login-box button {
-    cursor: pointer;
-    padding: 10px 30px;
-    background: #ffffff;
-    border-radius: 999px;
-    border: none;    
-    font-size: 14px;
-    font-weight: bold;
-    color: #0363c1;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 12px;
-  }
-
-  .error {
-    color: #ff4d4d;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-
-  /* 🔹 POSICIONAMENTO DA NAVE */
   .nave-img {
-    position: absolute;
-    top: 10%;
-    right: 5%;
-    width: 120px;
-    z-index: 1;
-    animation: flutuar 4s ease-in-out infinite;
+    width: 90px;
   }
-
-  /* 🔹 ANIMAÇÃO DE FLUTUAÇÃO */
-  @keyframes flutuar {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
-  }
+}
 
 </style>
 </head>
 
 <body>
 
-<div class="background-container">
-  <video autoplay muted playsinline>
-    <source src="Videos/Fundo_login.mp4" type="video/mp4">
-  </video>
-</div>
+<div class="app-wrapper">
 
-<audio id="bg-audio" autoplay loop muted>
-  <source src="Audios/baroque.mp3" type="audio/mpeg">
-</audio>
-
-<!-- IMAGEM -->
-<img src="Imagens/nave.png" alt="nave" class="nave-img">
-
-<div class="container">
-  <div class="login-box">
-    <h2>LOGIN</h2>
-    
-    <input type="text" id="username" placeholder="Usuário">
-    <input type="password" id="password" placeholder="Senha">
-    
-    <button onclick="login()">Entrar</button>
-    
-    <div class="error" id="error-msg"></div>
+  <div class="background-container">
+    <video autoplay muted playsinline>
+      <source src="Videos/Fundo_login.mp4" type="video/mp4">
+    </video>
   </div>
+
+  <audio id="bg-audio" autoplay loop muted>
+    <source src="Audios/baroque.mp3" type="audio/mpeg">
+  </audio>
+
+  <img src="Imagens/nave.png" alt="nave" class="nave-img">
+
+  <div class="container">
+    <div class="login-box">
+      <h2>LOGIN</h2>
+      
+      <input type="text" id="username" placeholder="Usuário">
+      <input type="password" id="password" placeholder="Senha">
+      
+      <button onclick="login()">Entrar</button>
+      
+      <div class="error" id="error-msg"></div>
+    </div>
+  </div>
+
 </div>
 
 <script>
-  const audio = document.getElementById('bg-audio');
+const audio = document.getElementById('bg-audio');
 
-  window.addEventListener('load', () => {
-    audio.volume = 0.05;
-    audio.muted = false;
-  });
+window.addEventListener('load', () => {
+  audio.volume = 0.05;
+  audio.muted = false;
+});
 
-  function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
-    const errorMsg = document.getElementById("error-msg");
+function login() {
+  const user = document.getElementById("username").value;
+  const pass = document.getElementById("password").value;
+  const errorMsg = document.getElementById("error-msg");
 
-    const validUser = "aluno";
-    const validPass = "1234";
+  const validUser = "aluno";
+  const validPass = "1234";
 
-    if (user === validUser && pass === validPass) {
-      window.location.href = "escolha.html";
-    } else {
-      errorMsg.textContent = "Usuário ou senha incorretos.";
-    }
+  if (user === validUser && pass === validPass) {
+    window.location.href = "escolha.html";
+  } else {
+    errorMsg.textContent = "Usuário ou senha incorretos.";
   }
+}
 </script>
 
 </body>
