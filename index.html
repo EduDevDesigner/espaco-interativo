@@ -6,111 +6,129 @@
 <title>Início</title>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Orbitron', sans-serif;
-    background: #001c40ff; /* ← COR DE PRÉ-CARREGAMENTO */
-    color: #fff;
-  }
 
-  /* FUNDO EM VÍDEO */
-  .background-container {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    background: #001c40ff; /* ← COR DE PRÉ-CARREGAMENTO */
-    z-index: 0;
-  }
+/* ===== CONFIGURAÇÃO PADRÃO (MOBILE) ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  background: #001c40ff;
+  color: #fff;
+}
 
-  .background-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.03);
-  }
+/* MOBILE ocupa 100% */
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
 
-  .container {
-    position: relative;
-    z-index: 2;
+/* ===== DESKTOP CENTRALIZADO ===== */
+@media (min-width: 768px) {
+  body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .buttons-container {
-    position: absolute;
-    top: 58%;
-    z-index: 4;
+    background: #001c40ff; /* cor das bordas */
   }
 
-  /* BOTÃO Entrar */
-  .card {
-    cursor: pointer;
-    padding: 16px 54px;
-    background: #ffffff;
-    border-radius: 999px;
-    border: none;
-    color: #1e90ff;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-
-    box-shadow:
-      0 0 18px rgba(30,144,255,0.6),
-      0 0 30px rgba(30,144,255,0.4) inset;
-
-    animation: glowBtn 2.8s ease-in-out infinite alternate;
-    transition: transform 0.25s ease, background 0.25s ease;
+  .app-wrapper {
+    width: 390px;
+    height: 844px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
   }
+}
 
-  .card:hover {
-    transform: scale(1.08);
-    background: #f2f8ff;
-  }
+/* ===== SEU CÓDIGO ORIGINAL ===== */
 
-  @keyframes glowBtn {
-    0%   { box-shadow: 0 0 16px rgba(30,144,255,0.5); }
-    50%  { box-shadow: 0 0 32px rgba(30,144,255,0.9); }
-    100% { box-shadow: 0 0 16px rgba(30,144,255,0.5); }
-  }
+.background-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #001c40ff;
+  z-index: 0;
+}
 
-  @media (max-width:768px) {
-    .card {
-      font-size: 18px;
-      padding: 14px 46px;
-    }
-  }
+.background-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+}
 
-  @media (max-width:480px) {
-    .card {
-      font-size: 16px;
-      padding: 12px 38px;
-    }
-  }
+.container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.buttons-container {
+  position: absolute;
+  top: 58%;
+  z-index: 4;
+}
+
+.card {
+  cursor: pointer;
+  padding: 16px 54px;
+  background: #ffffff;
+  border-radius: 999px;
+  border: none;
+  color: #1e90ff;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 18px rgba(30,144,255,0.6),
+    0 0 30px rgba(30,144,255,0.4) inset;
+  animation: glowBtn 2.8s ease-in-out infinite alternate;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.card:hover {
+  transform: scale(1.08);
+  background: #f2f8ff;
+}
+
+@keyframes glowBtn {
+  0%   { box-shadow: 0 0 16px rgba(30,144,255,0.5); }
+  50%  { box-shadow: 0 0 32px rgba(30,144,255,0.9); }
+  100% { box-shadow: 0 0 16px rgba(30,144,255,0.5); }
+}
+
+@media (max-width:768px) {
+  .card { font-size: 18px; padding: 14px 46px; }
+}
+
+@media (max-width:480px) {
+  .card { font-size: 16px; padding: 12px 38px; }
+}
+
 </style>
 </head>
 
 <body>
 
-  <!-- FUNDO EM VÍDEO -->
+<div class="app-wrapper">
+
   <div class="background-container" aria-hidden="true">
     <video autoplay muted playsinline>
       <source src="Videos/fundo.mp4" type="video/mp4">
     </video>
   </div>
 
-  <!-- ÁUDIO DE FUNDO -->
   <audio id="bg-audio" autoplay loop muted>
-  <source src="Audios/baroque.mp3" type="audio/mpeg">
+    <source src="Audios/baroque.mp3" type="audio/mpeg">
   </audio>
-
 
   <div class="container">   
     <div class="buttons-container">
@@ -120,16 +138,15 @@
     </div>
   </div>
 
-  <!-- CONTROLE DE VOLUME -->
-  <script>
-  const audio = document.getElementById('bg-audio');
+</div>
 
-  window.addEventListener('load', () => {
-    audio.volume = 0.05; // volume baixo
-    audio.muted = false; // desmuta depois de carregar
-  });
+<script>
+const audio = document.getElementById('bg-audio');
+window.addEventListener('load', () => {
+  audio.volume = 0.05;
+  audio.muted = false;
+});
 </script>
-
 
 </body>
 </html>
