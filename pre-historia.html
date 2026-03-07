@@ -175,9 +175,10 @@ const audioButton = document.getElementById("audioButton");
 
 let currentAudio = null;
 
-document.querySelectorAll('[mindar-image-target]').forEach((target) => {
+// pega todos os marcadores
+const targets = document.querySelectorAll('[mindar-image-target]');
 
-  const index = target.getAttribute("mindar-image-target").targetIndex;
+targets.forEach((target, index) => {
 
   target.addEventListener("targetFound", () => {
 
@@ -185,15 +186,15 @@ document.querySelectorAll('[mindar-image-target]').forEach((target) => {
 
     audioButton.style.display = "block";
 
-    currentAudio = document.getElementById("audio"+index);
+    currentAudio = document.getElementById("audio" + index);
 
   });
 
   target.addEventListener("targetLost", () => {
 
-    message.classList.remove("hidden");
-
     audioButton.style.display = "none";
+
+    message.classList.remove("hidden");
 
     if(currentAudio){
       currentAudio.pause();
@@ -204,16 +205,20 @@ document.querySelectorAll('[mindar-image-target]').forEach((target) => {
 
 });
 
-audioButton.addEventListener("click", ()=>{
+// tocar áudio quando clicar
+audioButton.addEventListener("click", () => {
 
   if(currentAudio){
 
-    document.querySelectorAll("audio").forEach(a=>{
+    // parar todos os outros áudios
+    document.querySelectorAll("audio").forEach(a => {
       a.pause();
-      a.currentTime=0;
+      a.currentTime = 0;
     });
 
-    currentAudio.play();
+    currentAudio.play().catch(err=>{
+      console.log("Erro ao tocar áudio:", err);
+    });
 
   }
 
