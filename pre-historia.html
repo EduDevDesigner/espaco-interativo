@@ -59,9 +59,53 @@
 
       <!-- O PLEISTOCENO 1 -->
       <a-entity mindar-image-target="targetIndex: 0">
+
         <a-gltf-model 
           rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#objeto1">
         </a-gltf-model>
+
+        <!-- 🔹 LINHA DO TEMPO HOLOGRÁFICA -->
+        <a-entity position="0 0.8 0">
+
+          <!-- Nome do período -->
+          <a-text
+            value="PLEISTOCENO"
+            align="center"
+            color="#00e5ff"
+            width="3"
+            position="0 0.25 0">
+          </a-text>
+
+          <!-- Barra da linha do tempo -->
+          <a-text
+            value="⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜"
+            align="center"
+            color="#00e5ff"
+            width="3"
+            position="0 0.12 0">
+          </a-text>
+
+          <!-- Datas -->
+          <a-text
+            value="2,6 milhões – 11.700 anos"
+            align="center"
+            color="#ffffff"
+            width="3"
+            position="0 0 0">
+          </a-text>
+
+          <!-- Outros períodos apagados -->
+          <a-text
+            value="Mioceno   -   Plioceno   -   Pleistoceno   -   Holoceno"
+            align="center"
+            color="#888888"
+            opacity="0.6"
+            width="4"
+            position="0 -0.15 0">
+          </a-text>
+
+        </a-entity>
+
       </a-entity>
       
       <!-- O PALEOLÍTICO 2 -->
