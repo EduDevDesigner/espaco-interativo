@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title>PRÉ-HISTÓRIA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+    
+    #track-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #004aadff;
+      color: #ffffff;
+      font-family: 'Changa One', sans-serif;
+      font-size: 1em;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center; 
+      z-index: 9999;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    </style>    
+  </head>
+
+  <body>
+    
+    <!-- 🔹 Mensagem de foco no track -->
+    <div id="track-message">
+      Aponte a câmera para o marcador!
+    </div>
+
+    <!-- Cena AR -->
+    <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind; filterMinCF: 0.0001; 
+              filterBeta: 0.05;
+              missTolerance: 5;
+              warmupTolerance: 4;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             xr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+
+      <a-assets>
+        <a-asset-item id="objeto1" src="Modelos/objeto1.glb"></a-asset-item>
+        <a-asset-item id="objeto2" src="Modelos/objeto2.glb"></a-asset-item>
+        <a-asset-item id="objeto3" src="Modelos/objeto3.glb"></a-asset-item>
+        <a-asset-item id="objeto4" src="Modelos/objeto4.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- O PLEISTOCENO 1 -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-gltf-model 
+          rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#objeto1">
+        </a-gltf-model>
+      </a-entity>
+      
+      <!-- O PALEOLÍTICO 2 -->
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-gltf-model 
+          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto2">
+        </a-gltf-model>
+      </a-entity>
+
+      <!-- A MEGAFAUNA 3 -->
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-gltf-model 
+          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3">
+        </a-gltf-model>
+      </a-entity>
+ 
+      <!-- O HOMO SAPIENS 4 -->
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-gltf-model 
+          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4">
+        </a-gltf-model>
+      </a-entity>
+
+    </a-scene>
+
+    <!-- SCRIPT PARA CONTROLAR A MENSAGEM -->
+    <script>
+
+      const message = document.getElementById("track-message");
+
+      document.querySelectorAll('[mindar-image-target]').forEach((target) => {
+
+        target.addEventListener("targetFound", () => {
+          message.classList.add("hidden");
+        });
+
+        target.addEventListener("targetLost", () => {
+          message.classList.remove("hidden");
+        });
+
+      });
+
+    </script>
+
+  </body>
+</html>
