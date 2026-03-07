@@ -28,6 +28,25 @@
       display: none !important;
     }
 
+    /* BOTÃO DE ÁUDIO */
+
+    .audio-btn{
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background:#00e5ff;
+      color:#000;
+      padding:12px 20px;
+      border-radius:10px;
+      font-size:16px;
+      font-weight:bold;
+      border:none;
+      z-index:9999;
+      display:none;
+      cursor:pointer;
+    }
+
     </style>    
   </head>
 
@@ -37,6 +56,22 @@
     <div id="track-message">
       Aponte a câmera para o marcador!
     </div>
+
+    <!-- BOTÃO AUDIO -->
+    <button id="audioButton" class="audio-btn">
+      ▶ Ouvir explicação
+    </button>
+
+    <!-- AUDIOS -->
+    <audio id="audio0" src="audios/audio1.mp3"></audio>
+    <audio id="audio1" src="audios/audio2.mp3"></audio>
+    <audio id="audio2" src="audios/audio3.mp3"></audio>
+    <audio id="audio3" src="audios/audio4.mp3"></audio>
+    <audio id="audio4" src="audios/audio5.mp3"></audio>
+    <audio id="audio5" src="audios/audio6.mp3"></audio>
+    <audio id="audio6" src="audios/audio7.mp3"></audio>
+    <audio id="audio7" src="audios/audio8.mp3"></audio>
+    <audio id="audio8" src="audios/audio9.mp3"></audio>
 
     <!-- Cena AR -->
     <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind; filterMinCF: 0.0001; 
@@ -69,10 +104,8 @@
           rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#objeto1">
         </a-gltf-model>
 
-        <!-- 🔹 LINHA DO TEMPO HOLOGRÁFICA -->
         <a-entity position="0 1.8 0" rotation="90 0 0 ">
 
-          <!-- Nome do período -->
           <a-text
             value="PLEISTOCENO"
             align="center"
@@ -81,7 +114,6 @@
             position="0 0.25 0">
           </a-text>          
 
-          <!-- Datas -->
           <a-text
             value="2,6 milhões – 11.700 anos"
             align="center"
@@ -96,80 +128,98 @@
       
       <!-- O PALEOLÍTICO 2 -->
       <a-entity mindar-image-target="targetIndex: 1">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto2">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto2"></a-gltf-model>
       </a-entity>
 
       <!-- A MEGAFAUNA 3 -->
       <a-entity mindar-image-target="targetIndex: 2">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3"></a-gltf-model>
       </a-entity>
  
       <!-- O HOMO SAPIENS 4 -->
       <a-entity mindar-image-target="targetIndex: 3">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4"></a-gltf-model>
       </a-entity>
       
-      <!-- NOMADISMO E ORGANIZAÇÃO SOCIAL 5 -->
+      <!-- NOMADISMO 5 -->
       <a-entity mindar-image-target="targetIndex: 4">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto5">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto5"></a-gltf-model>
       </a-entity>
       
-     <!-- TECNOLOGIA E FOGO 6 -->
+      <!-- TECNOLOGIA E FOGO 6 -->
       <a-entity mindar-image-target="targetIndex: 5">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto6">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto6"></a-gltf-model>
       </a-entity> 
 
-      <!-- ARTE RUPESTRE E PENSAMENTO SIMBÓLICO 7 -->
+      <!-- ARTE RUPESTRE 7 -->
       <a-entity mindar-image-target="targetIndex: 6">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto7">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto7"></a-gltf-model>
       </a-entity> 
       
-     <!-- O MESOLÍTICO 8 -->
+      <!-- MESOLÍTICO 8 -->
       <a-entity mindar-image-target="targetIndex: 7">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto8">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto8"></a-gltf-model>
       </a-entity>  
       
-      <!-- O NEOLÍTICO 9 -->
+      <!-- NEOLÍTICO 9 -->
       <a-entity mindar-image-target="targetIndex: 8">
-        <a-gltf-model 
-          rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto9">
-        </a-gltf-model>
+        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto9"></a-gltf-model>
       </a-entity>  
 
     </a-scene>
 
-    <!-- SCRIPT PARA CONTROLAR A MENSAGEM -->
-    <script>
+<script>
 
-      const message = document.getElementById("track-message");
+const message = document.getElementById("track-message");
+const audioButton = document.getElementById("audioButton");
 
-      document.querySelectorAll('[mindar-image-target]').forEach((target) => {
+let currentAudio = null;
 
-        target.addEventListener("targetFound", () => {
-          message.classList.add("hidden");
-        });
+document.querySelectorAll('[mindar-image-target]').forEach((target) => {
 
-        target.addEventListener("targetLost", () => {
-          message.classList.remove("hidden");
-        });
+  const index = target.getAttribute("mindar-image-target").targetIndex;
 
-      });
+  target.addEventListener("targetFound", () => {
 
-    </script>
+    message.classList.add("hidden");
+
+    audioButton.style.display = "block";
+
+    currentAudio = document.getElementById("audio"+index);
+
+  });
+
+  target.addEventListener("targetLost", () => {
+
+    message.classList.remove("hidden");
+
+    audioButton.style.display = "none";
+
+    if(currentAudio){
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+
+  });
+
+});
+
+audioButton.addEventListener("click", ()=>{
+
+  if(currentAudio){
+
+    document.querySelectorAll("audio").forEach(a=>{
+      a.pause();
+      a.currentTime=0;
+    });
+
+    currentAudio.play();
+
+  }
+
+});
+
+</script>
 
   </body>
 </html>
