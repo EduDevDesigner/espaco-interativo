@@ -10,24 +10,27 @@
     <style>
     
     #track-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #004aadff; /* ← COR DE PRÉ-CARREGAMENTO */
-    color: #ffffff;
-    font-family: 'Changa One', sans-serif;
-    font-size: 1em;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-align: center; 
-    z-index: 9999;
-  }
-  .hidden {
-    display: none !important;
-  }    
-  </style>    
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #004aadff;
+      color: #ffffff;
+      font-family: 'Changa One', sans-serif;
+      font-size: 1em;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center; 
+      z-index: 9999;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    </style>    
   </head>
+
   <body>
     
     <!-- 🔹 Mensagem de foco no track -->
@@ -82,8 +85,26 @@
         </a-gltf-model>
       </a-entity>
 
-    </a-scene>    
+    </a-scene>
+
+    <!-- SCRIPT PARA CONTROLAR A MENSAGEM -->
+    <script>
+
+      const message = document.getElementById("track-message");
+
+      document.querySelectorAll('[mindar-image-target]').forEach((target) => {
+
+        target.addEventListener("targetFound", () => {
+          message.classList.add("hidden");
+        });
+
+        target.addEventListener("targetLost", () => {
+          message.classList.remove("hidden");
+        });
+
+      });
+
+    </script>
 
   </body>
 </html>
-
