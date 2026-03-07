@@ -29,15 +29,14 @@
     }
 
     .audio-btn{
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);       
-      z-index:9999;      
-      cursor:pointer;
-      width:40px; 
-      height:40px
-    }
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width:70px;
+  display:none;
+  cursor:pointer;
+}
 
     </style>    
   </head>
@@ -48,9 +47,7 @@
       Aponte a câmera para o marcador!
     </div>
 
-    <button id="audioButton" class="audio-btn">
-  <img src="Imagens/btn_ouvir.png" alt="Ouvir explicação">
-</button>
+    <img id="audioButton" class="audio-btn" src="Imagens/btn_ouvir.png" alt="Ouvir explicação">
     
     <!-- AUDIOS -->
     <audio id="audio0" src="Audios/audio1.mp3"></audio>
