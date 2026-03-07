@@ -90,21 +90,31 @@
     <!-- SCRIPT PARA CONTROLAR A MENSAGEM -->
     <script>
 
-      const message = document.getElementById("track-message");
+const message = document.getElementById("track-message");
 
-      document.querySelectorAll('[mindar-image-target]').forEach((target) => {
+const textos = {
+  0: "Período Pleistoceno: época marcada por grandes mudanças climáticas e surgimento de várias espécies humanas.",
+  1: "Período Paleolítico: os primeiros humanos desenvolveram ferramentas de pedra e viveram como caçadores-coletores.",
+  2: "Megafauna: grandes animais pré-históricos como mamutes e tigres-dente-de-sabre habitavam a Terra.",
+  3: "Homo sapiens: nossa espécie desenvolveu linguagem, cultura e organização social complexa."
+};
 
-        target.addEventListener("targetFound", () => {
-          message.classList.add("hidden");
-        });
+document.querySelectorAll('[mindar-image-target]').forEach((target) => {
 
-        target.addEventListener("targetLost", () => {
-          message.classList.remove("hidden");
-        });
+  const index = target.getAttribute("mindar-image-target").split(":")[1].trim();
 
-      });
+  target.addEventListener("targetFound", () => {
+    message.innerHTML = textos[index];
+    message.classList.remove("hidden");
+  });
 
-    </script>
+  target.addEventListener("targetLost", () => {
+    message.innerHTML = "Aponte a câmera para o marcador!";
+  });
+
+});
+
+</script>
 
   </body>
 </html>
