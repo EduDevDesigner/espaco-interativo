@@ -28,23 +28,60 @@
       display: none !important;
     }
 
-   .audio-btn{
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: transparent;
-  border: none;
-  padding: 0;
-  z-index:9999;
-  display:none;
-  cursor:pointer;
-}
+    /* BOTÃO CENTRAL (OUVIR) */
+    .audio-btn{
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: transparent;
+      border: none;
+      padding: 0;
+      z-index:9999;
+      display:none;
+      cursor:pointer;
+    }
 
-.audio-btn img{
-  width:70px;
-  height:auto;
-}
+    .audio-btn img{
+      width:70px;
+      height:auto;
+    }
+
+    /* BOTÃO TERRA (DIREITA) */
+    .terra-btn{
+      position: fixed;
+      bottom: 40px;
+      left: calc(50% + 90px);
+      background: transparent;
+      border: none;
+      padding: 0;
+      z-index:9999;
+      display:none;
+      cursor:pointer;
+    }
+
+    .terra-btn img{
+      width:70px;
+      height:auto;
+    }
+
+    /* BOTÃO RELEVO (ESQUERDA) */
+    .relevo-btn{
+      position: fixed;
+      bottom: 40px;
+      left: calc(50% - 160px);
+      background: transparent;
+      border: none;
+      padding: 0;
+      z-index:9999;
+      display:none;
+      cursor:pointer;
+    }
+
+    .relevo-btn img{
+      width:70px;
+      height:auto;
+    }
 
     </style>    
   </head>
@@ -55,9 +92,17 @@
       Aponte a câmera para o marcador!
     </div>
 
-    <button id="audioButton" class="audio-btn">
-  <img src="Imagens/btn_ouvir.png" alt="Ouvir explicação">
-</button>
+  <button id="audioButton" class="audio-btn">
+     <img src="Imagens/btn_ouvir.png" alt="Ouvir explicação">
+  </button>
+    
+  <button id="terraButton" class="terra-btn">
+     <img src="Imagens/btn_terra.png" alt="terra">
+  </button>
+    
+  <button id="relevoButton" class="relevo-btn">
+     <img src="Imagens/btn_relevo.png" alt="relevo">
+  </button>
     
     <!-- AUDIOS -->
     <audio id="audio0" src="Audios/audio1.mp3"></audio>
@@ -90,6 +135,7 @@
         <a-asset-item id="objeto8" src="Modelos/objeto8.glb"></a-asset-item>
         <a-asset-item id="objeto9" src="Modelos/objeto9.glb"></a-asset-item>
         <a-asset-item id="moon" src="Modelos/moon.glb"></a-asset-item>
+        <a-asset-item id="relevo" src="Modelos/relevo.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -97,18 +143,13 @@
      <a-entity mindar-image-target="targetIndex: 0">
 
       <a-entity position="0 0.5 0" animation="property: rotation; from: 0 0 0; to: 0 0 360; loop: true; dur: 50000; easing: linear">
-        <!-- Terra -->
-        <a-gltf-model src="#objeto1" scale="6 6 6" rotation="90 0 0">
-        </a-gltf-model>
+        <a-gltf-model src="#objeto1" scale="6 6 6" rotation="90 0 0"></a-gltf-model>
       </a-entity>
        
-        <!-- lua -->
-       <a-entity position="1.5 0.5 0" >        
-        <a-gltf-model src="#moon" scale="3 3 3" rotation="90 0 0">
-        </a-gltf-model>
-        </a-entity>
+       <a-entity position="1.5 0.5 0">        
+        <a-gltf-model src="#moon" scale="3 3 3" rotation="90 0 0"></a-gltf-model>
+       </a-entity>
        
-       <!-- Atmosfera -->
        <a-sphere position="0 0.5 0" radius="0.95" segments-width="64" segments-height="64" material="color:#4fc3f7;
               transparent:true;
               opacity:0.25;
@@ -116,23 +157,15 @@
               blending:additive">
        </a-sphere>
        
+       <a-entity position="0 0 0">        
+        <a-gltf-model src="#relevo" scale="1 1 1" rotation="90 0 0"></a-gltf-model>
+       </a-entity>
+       
         <a-entity position="0 1.8 0" rotation="60 0 0 ">
 
-          <a-text
-            value="PLEISTOCENO"
-            align="center"
-            color="#00e5ff"
-            width="3"
-            position="0 0.30 0">
-          </a-text>          
+          <a-text value="PLEISTOCENO" align="center" color="#00e5ff" width="3" position="0 0.30 0"></a-text>          
 
-          <a-text
-            value="2,58 milhoes – 11.700 anos"
-            align="center"
-            color="#ffffff"
-            width="3"
-            position="0 0.5 0">
-          </a-text>         
+          <a-text value="2,58 milhoes – 11.700 anos" align="center" color="#ffffff" width="3" position="0 0.5 0"></a-text>         
 
         </a-entity>
 
@@ -176,6 +209,8 @@
 
 const message = document.getElementById("track-message");
 const audioButton = document.getElementById("audioButton");
+const terraButton = document.getElementById("terraButton");
+const relevoButton = document.getElementById("relevoButton");
 
 let currentAudio = null;
 let activeTargetIndex = null;
@@ -189,6 +224,8 @@ targets.forEach((target, index) => {
 
     message.classList.add("hidden");
     audioButton.style.display = "block";
+    terraButton.style.display = "block";
+    relevoButton.style.display = "block";
 
     activeTargetIndex = index;
     currentAudio = document.getElementById("audio"+index);
@@ -205,6 +242,9 @@ targets.forEach((target, index) => {
   target.addEventListener("targetLost", () => {
 
     audioButton.style.display = "none";
+    terraButton.style.display = "none";
+    relevoButton.style.display = "none";
+
     message.classList.remove("hidden");
 
     if(currentAudio){
