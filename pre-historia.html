@@ -40,9 +40,7 @@ display:none;
 cursor:pointer;
 }
 
-.audio-btn img{
-width:70px;
-}
+.audio-btn img{width:70px;}
 
 .terra-btn{
 position: fixed;
@@ -137,18 +135,14 @@ rotation="90 0 0">
 
 </a-entity>
 
-<!-- LUA -->
 <a-entity position="1.5 0.5 0">
-
 <a-gltf-model
 src="#moon"
 scale="3 3 3"
 rotation="90 0 0">
 </a-gltf-model>
-
 </a-entity>
 
-<!-- ATMOSFERA -->
 <a-sphere
 position="0 0.5 0"
 radius="0.95"
@@ -190,7 +184,9 @@ const relevoModel=document.getElementById("relevoModel")
 
 let currentAudio=null
 let activeTargetIndex=null
-let lastTargetIndex=null
+
+/* GUARDA QUAL OBJETO ESTAVA ATIVO */
+let modoAtual=null
 
 const targets=document.querySelectorAll('[mindar-image-target]')
 
@@ -207,6 +203,18 @@ relevoButton.style.display="block"
 activeTargetIndex=index
 currentAudio=document.getElementById("audio"+index)
 
+/* RESTAURA O OBJETO ANTERIOR */
+
+if(modoAtual==="terra"){
+terraGroup.setAttribute("visible",true)
+relevoModel.setAttribute("visible",false)
+}
+
+if(modoAtual==="relevo"){
+terraGroup.setAttribute("visible",false)
+relevoModel.setAttribute("visible",true)
+}
+
 })
 
 target.addEventListener("targetLost",()=>{
@@ -216,9 +224,6 @@ terraButton.style.display="none"
 relevoButton.style.display="none"
 
 message.classList.remove("hidden")
-
-terraGroup.setAttribute("visible",false)
-relevoModel.setAttribute("visible",false)
 
 })
 
@@ -234,12 +239,16 @@ currentAudio.play()
 
 terraButton.addEventListener("click",()=>{
 
+modoAtual="terra"
+
 terraGroup.setAttribute("visible",true)
 relevoModel.setAttribute("visible",false)
 
 })
 
 relevoButton.addEventListener("click",()=>{
+
+modoAtual="relevo"
 
 terraGroup.setAttribute("visible",false)
 relevoModel.setAttribute("visible",true)
