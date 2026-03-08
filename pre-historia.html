@@ -99,8 +99,21 @@
 
         <a-gltf-model src="#objeto1" scale="6 6 6" rotation="90 0 0">
         </a-gltf-model>
-
       </a-entity>
+       
+       <!-- Atmosfera -->
+  <a-sphere
+    position="0 0.5 0"
+    radius="3.4"
+    segments-width="64"
+    segments-height="64"
+    material="color:#4fc3f7;
+              transparent:true;
+              opacity:0.25;
+              side:double;
+              blending:additive">
+  </a-sphere>
+       
         <a-entity position="0 1.8 0" rotation="60 0 0 ">
 
           <a-text
