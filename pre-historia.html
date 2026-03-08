@@ -1,274 +1,252 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <title>PRÉ-HISTÓRIA</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css">
-    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    
-    <style>
-    
-    #track-message {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #004aadff;
-      color: #ffffff;
-      font-family: 'Changa One', sans-serif;
-      font-size: 1em;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-align: center; 
-      z-index: 9999;
-    }
+<head>
+<title>PRÉ-HISTÓRIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css">
 
-    .hidden {
-      display: none !important;
-    }
+<script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-    /* BOTÃO CENTRAL (OUVIR) */
-    .audio-btn{
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: transparent;
-      border: none;
-      padding: 0;
-      z-index:9999;
-      display:none;
-      cursor:pointer;
-    }
+<style>
 
-    .audio-btn img{
-      width:70px;
-      height:auto;
-    }
+#track-message{
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background:#004aadff;
+color:#ffffff;
+font-family:'Changa One',sans-serif;
+font-size:1em;
+padding:10px 20px;
+border-radius:8px;
+text-align:center;
+z-index:9999;
+}
 
-    /* BOTÃO TERRA (DIREITA) */
-    .terra-btn{
-      position: fixed;
-      bottom: 40px;
-      left: calc(50% + 90px);
-      background: transparent;
-      border: none;
-      padding: 0;
-      z-index:9999;
-      display:none;
-      cursor:pointer;
-    }
+.hidden{display:none!important;}
 
-    .terra-btn img{
-      width:70px;
-      height:auto;
-    }
+.audio-btn{
+position: fixed;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
+background:transparent;
+border:none;
+padding:0;
+z-index:9999;
+display:none;
+cursor:pointer;
+}
 
-    /* BOTÃO RELEVO (ESQUERDA) */
-    .relevo-btn{
-      position: fixed;
-      bottom: 40px;
-      left: calc(50% - 160px);
-      background: transparent;
-      border: none;
-      padding: 0;
-      z-index:9999;
-      display:none;
-      cursor:pointer;
-    }
+.audio-btn img{
+width:70px;
+}
 
-    .relevo-btn img{
-      width:70px;
-      height:auto;
-    }
+.terra-btn{
+position: fixed;
+bottom:40px;
+left:calc(50% + 90px);
+background:transparent;
+border:none;
+padding:0;
+z-index:9999;
+display:none;
+cursor:pointer;
+}
 
-    </style>    
-  </head>
+.terra-btn img{width:70px;}
 
-  <body>
-    
-    <div id="track-message">
-      Aponte a câmera para o marcador!
-    </div>
+.relevo-btn{
+position: fixed;
+bottom:40px;
+left:calc(50% - 160px);
+background:transparent;
+border:none;
+padding:0;
+z-index:9999;
+display:none;
+cursor:pointer;
+}
 
-  <button id="audioButton" class="audio-btn">
-     <img src="Imagens/btn_ouvir.png" alt="Ouvir explicação">
-  </button>
-    
-  <button id="terraButton" class="terra-btn">
-     <img src="Imagens/btn_terra.png" alt="terra">
-  </button>
-    
-  <button id="relevoButton" class="relevo-btn">
-     <img src="Imagens/btn_relevo.png" alt="relevo">
-  </button>
-    
-    <!-- AUDIOS -->
-    <audio id="audio0" src="Audios/audio1.mp3"></audio>
-    <audio id="audio1" src="Audios/audio2.mp3"></audio>
-    <audio id="audio2" src="Audios/audio3.mp3"></audio>
-    <audio id="audio3" src="Audios/audio4.mp3"></audio>
-    <audio id="audio4" src="Audios/audio5.mp3"></audio>
-    <audio id="audio5" src="Audios/audio6.mp3"></audio>
-    <audio id="audio6" src="Audios/audio7.mp3"></audio>
-    <audio id="audio7" src="Audios/audio8.mp3"></audio>
-    <audio id="audio8" src="Audios/audio9.mp3"></audio>
+.relevo-btn img{width:70px;}
 
-    <a-scene mindar-image="imageTargetSrc: Imagens/targets.mind; filterMinCF: 0.0001; 
-              filterBeta: 0.05;
-              missTolerance: 5;
-              warmupTolerance: 4;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             xr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
+</style>
+</head>
 
-      <a-assets>
-        <a-asset-item id="objeto1" src="Modelos/object1.glb"></a-asset-item>
-        <a-asset-item id="objeto2" src="Modelos/objeto2.glb"></a-asset-item>
-        <a-asset-item id="objeto3" src="Modelos/objeto3.glb"></a-asset-item>
-        <a-asset-item id="objeto4" src="Modelos/objeto4.glb"></a-asset-item>
-        <a-asset-item id="objeto5" src="Modelos/objeto5.glb"></a-asset-item>
-        <a-asset-item id="objeto6" src="Modelos/objeto6.glb"></a-asset-item>
-        <a-asset-item id="objeto7" src="Modelos/objeto7.glb"></a-asset-item>
-        <a-asset-item id="objeto8" src="Modelos/objeto8.glb"></a-asset-item>
-        <a-asset-item id="objeto9" src="Modelos/objeto9.glb"></a-asset-item>
-        <a-asset-item id="moon" src="Modelos/moon.glb"></a-asset-item>
-        <a-asset-item id="relevo" src="Modelos/relevo.glb"></a-asset-item>
-      </a-assets>
+<body>
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+<div id="track-message">
+Aponte a câmera para o marcador!
+</div>
 
-     <a-entity mindar-image-target="targetIndex: 0">
+<button id="audioButton" class="audio-btn">
+<img src="Imagens/btn_ouvir.png">
+</button>
 
-      <a-entity position="0 0.5 0" animation="property: rotation; from: 0 0 0; to: 0 0 360; loop: true; dur: 50000; easing: linear">
-        <a-gltf-model src="#objeto1" scale="6 6 6" rotation="90 0 0"></a-gltf-model>
-      </a-entity>
-       
-       <a-entity position="1.5 0.5 0">        
-        <a-gltf-model src="#moon" scale="3 3 3" rotation="90 0 0"></a-gltf-model>
-       </a-entity>
-       
-       <a-sphere position="0 0.5 0" radius="0.95" segments-width="64" segments-height="64" material="color:#4fc3f7;
-              transparent:true;
-              opacity:0.25;
-              side:double;
-              blending:additive">
-       </a-sphere>
-       
-       <a-entity position="0 0 0">        
-        <a-gltf-model src="#relevo" scale="1 1 1" rotation="90 0 0"></a-gltf-model>
-       </a-entity>
-       
-        <a-entity position="0 1.8 0" rotation="60 0 0 ">
+<button id="terraButton" class="terra-btn">
+<img src="Imagens/btn_terra.png">
+</button>
 
-          <a-text value="PLEISTOCENO" align="center" color="#00e5ff" width="3" position="0 0.30 0"></a-text>          
+<button id="relevoButton" class="relevo-btn">
+<img src="Imagens/btn_relevo.png">
+</button>
 
-          <a-text value="2,58 milhoes – 11.700 anos" align="center" color="#ffffff" width="3" position="0 0.5 0"></a-text>         
+<!-- AUDIOS -->
+<audio id="audio0" src="Audios/audio1.mp3"></audio>
+<audio id="audio1" src="Audios/audio2.mp3"></audio>
+<audio id="audio2" src="Audios/audio3.mp3"></audio>
+<audio id="audio3" src="Audios/audio4.mp3"></audio>
+<audio id="audio4" src="Audios/audio5.mp3"></audio>
+<audio id="audio5" src="Audios/audio6.mp3"></audio>
+<audio id="audio6" src="Audios/audio7.mp3"></audio>
+<audio id="audio7" src="Audios/audio8.mp3"></audio>
+<audio id="audio8" src="Audios/audio9.mp3"></audio>
 
-        </a-entity>
+<a-scene
+mindar-image="imageTargetSrc: Imagens/targets.mind;"
+color-space="sRGB"
+renderer="colorManagement:true,physicallyCorrectLights"
+xr-mode-ui="enabled:false"
+device-orientation-permission-ui="enabled:false">
 
-      </a-entity>
+<a-assets>
 
-      <a-entity mindar-image-target="targetIndex: 1">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto2"></a-gltf-model>
-      </a-entity>
+<a-asset-item id="objeto1" src="Modelos/object1.glb"></a-asset-item>
+<a-asset-item id="moon" src="Modelos/moon.glb"></a-asset-item>
+<a-asset-item id="relevo" src="Modelos/relevo.glb"></a-asset-item>
 
-      <a-entity mindar-image-target="targetIndex: 2">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3"></a-gltf-model>
-      </a-entity>
+</a-assets>
 
-      <a-entity mindar-image-target="targetIndex: 3">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4"></a-gltf-model>
-      </a-entity>
+<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 4">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto5"></a-gltf-model>
-      </a-entity>
+<a-entity mindar-image-target="targetIndex:0">
 
-      <a-entity mindar-image-target="targetIndex: 5">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto6"></a-gltf-model>
-      </a-entity>
+<!-- TERRA -->
+<a-entity id="terraGroup" visible="false">
 
-      <a-entity mindar-image-target="targetIndex: 6">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto7"></a-gltf-model>
-      </a-entity>
+<a-entity position="0 0.5 0"
+animation="property:rotation;from:0 0 0;to:0 0 360;loop:true;dur:50000;easing:linear">
 
-      <a-entity mindar-image-target="targetIndex: 7">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto8"></a-gltf-model>
-      </a-entity>
+<a-gltf-model
+src="#objeto1"
+scale="6 6 6"
+rotation="90 0 0">
+</a-gltf-model>
 
-      <a-entity mindar-image-target="targetIndex: 8">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto9"></a-gltf-model>
-      </a-entity>
+</a-entity>
 
-    </a-scene>
+<!-- LUA -->
+<a-entity position="1.5 0.5 0">
+
+<a-gltf-model
+src="#moon"
+scale="3 3 3"
+rotation="90 0 0">
+</a-gltf-model>
+
+</a-entity>
+
+<!-- ATMOSFERA -->
+<a-sphere
+position="0 0.5 0"
+radius="0.95"
+segments-width="64"
+segments-height="64"
+material="color:#4fc3f7;
+transparent:true;
+opacity:0.25;
+side:double;
+blending:additive">
+</a-sphere>
+
+</a-entity>
+
+<!-- RELEVO -->
+<a-entity id="relevoModel" visible="false">
+
+<a-gltf-model
+src="#relevo"
+scale="1 1 1"
+rotation="90 0 0">
+</a-gltf-model>
+
+</a-entity>
+
+</a-entity>
+
+</a-scene>
 
 <script>
 
-const message = document.getElementById("track-message");
-const audioButton = document.getElementById("audioButton");
-const terraButton = document.getElementById("terraButton");
-const relevoButton = document.getElementById("relevoButton");
+const message=document.getElementById("track-message")
+const audioButton=document.getElementById("audioButton")
+const terraButton=document.getElementById("terraButton")
+const relevoButton=document.getElementById("relevoButton")
 
-let currentAudio = null;
-let activeTargetIndex = null;
-let lastTargetIndex = null;
+const terraGroup=document.getElementById("terraGroup")
+const relevoModel=document.getElementById("relevoModel")
 
-const targets = document.querySelectorAll('[mindar-image-target]');
+let currentAudio=null
+let activeTargetIndex=null
+let lastTargetIndex=null
 
-targets.forEach((target, index) => {
+const targets=document.querySelectorAll('[mindar-image-target]')
 
-  target.addEventListener("targetFound", () => {
+targets.forEach((target,index)=>{
 
-    message.classList.add("hidden");
-    audioButton.style.display = "block";
-    terraButton.style.display = "block";
-    relevoButton.style.display = "block";
+target.addEventListener("targetFound",()=>{
 
-    activeTargetIndex = index;
-    currentAudio = document.getElementById("audio"+index);
+message.classList.add("hidden")
 
-    if(lastTargetIndex !== null && lastTargetIndex !== index){
-      document.querySelectorAll("audio").forEach(a=>{
-        a.pause();
-        a.currentTime = 0;
-      });
-    }
+audioButton.style.display="block"
+terraButton.style.display="block"
+relevoButton.style.display="block"
 
-  });
+activeTargetIndex=index
+currentAudio=document.getElementById("audio"+index)
 
-  target.addEventListener("targetLost", () => {
+})
 
-    audioButton.style.display = "none";
-    terraButton.style.display = "none";
-    relevoButton.style.display = "none";
+target.addEventListener("targetLost",()=>{
 
-    message.classList.remove("hidden");
+audioButton.style.display="none"
+terraButton.style.display="none"
+relevoButton.style.display="none"
 
-    if(currentAudio){
-      currentAudio.pause();
-    }
+message.classList.remove("hidden")
 
-    lastTargetIndex = activeTargetIndex;
-    activeTargetIndex = null;
+terraGroup.setAttribute("visible",false)
+relevoModel.setAttribute("visible",false)
 
-  });
+})
 
-});
+})
 
-audioButton.addEventListener("click", () => {
+audioButton.addEventListener("click",()=>{
 
-  if(currentAudio){
-    currentAudio.play().catch(err=>{
-      console.log("Erro ao tocar áudio:", err);
-    });
-  }
+if(currentAudio){
+currentAudio.play()
+}
 
-});
+})
+
+terraButton.addEventListener("click",()=>{
+
+terraGroup.setAttribute("visible",true)
+relevoModel.setAttribute("visible",false)
+
+})
+
+relevoButton.addEventListener("click",()=>{
+
+terraGroup.setAttribute("visible",false)
+relevoModel.setAttribute("visible",true)
+
+})
 
 </script>
 
-  </body>
+</body>
 </html>
