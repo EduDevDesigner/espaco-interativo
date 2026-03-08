@@ -129,7 +129,6 @@ device-orientation-permission-ui="enabled:false">
 
 <a-entity mindar-image-target="targetIndex:0">
 
-<!-- TERRA -->
 <a-entity id="terraGroup" visible="false">
 
 <a-entity position="0 0.5 0"
@@ -165,59 +164,49 @@ blending:additive">
 
 </a-entity>
 
-<!-- RELEVO -->
 <a-entity id="relevoModel" visible="false">
-
-<a-gltf-model
-src="#relevo"
-scale="1 1 1"
-rotation="90 0 0">
-</a-gltf-model>
+<a-gltf-model src="#relevo" scale="1 1 1" rotation="90 0 0"></a-gltf-model>
 </a-entity>
-  
+
 <a-entity position="0 1.8 0" rotation="60 0 0 ">
-
-  <a-text value="PLEISTOCENO" align="center" color="#00e5ff" width="3" position="0 0.30 0"></a-text>          
-
-  <a-text value="2,58 milhoes – 11.700 anos" align="center" color="#ffffff" width="3" position="0 0.5 0"></a-text>         
-
-</a-entity>  
+<a-text value="PLEISTOCENO" align="center" color="#00e5ff" width="3" position="0 0.30 0"></a-text>
+<a-text value="2,58 milhoes – 11.700 anos" align="center" color="#ffffff" width="3" position="0 0.5 0"></a-text>
+</a-entity>
 
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 1">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto2"></a-gltf-model>
-      </a-entity>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto2"></a-gltf-model>
+</a-entity>
 
 <a-entity mindar-image-target="targetIndex: 2">
-      <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3"></a-gltf-model>
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 3">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4"></a-gltf-model>
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 4">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto5"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto5"></a-gltf-model>
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 5">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto6"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto6"></a-gltf-model>
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 6">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto7"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto7"></a-gltf-model>
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 7">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto8"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto8"></a-gltf-model>
 </a-entity>
 
 <a-entity mindar-image-target="targetIndex: 8">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto9"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto9"></a-gltf-model>
 </a-entity>
-  
-  
+
 </a-scene>
 
 <script>
@@ -232,8 +221,9 @@ const relevoModel=document.getElementById("relevoModel")
 
 let currentAudio=null
 let activeTargetIndex=null
+let lastTargetIndex=null
+let pausedByTracking=false
 
-/* GUARDA QUAL OBJETO ESTAVA ATIVO */
 let modoAtual=null
 
 const targets=document.querySelectorAll('[mindar-image-target]')
@@ -251,7 +241,19 @@ relevoButton.style.display="block"
 activeTargetIndex=index
 currentAudio=document.getElementById("audio"+index)
 
-/* RESTAURA O OBJETO ANTERIOR */
+if(lastTargetIndex!==null && lastTargetIndex!==index){
+
+document.querySelectorAll("audio").forEach(a=>{
+a.pause()
+a.currentTime=0
+})
+
+}
+
+if(pausedByTracking && currentAudio){
+currentAudio.play().catch(()=>{})
+pausedByTracking=false
+}
 
 if(modoAtual==="terra"){
 terraGroup.setAttribute("visible",true)
@@ -273,6 +275,13 @@ relevoButton.style.display="none"
 
 message.classList.remove("hidden")
 
+if(currentAudio && !currentAudio.paused){
+currentAudio.pause()
+pausedByTracking=true
+}
+
+lastTargetIndex=activeTargetIndex
+
 })
 
 })
@@ -280,7 +289,7 @@ message.classList.remove("hidden")
 audioButton.addEventListener("click",()=>{
 
 if(currentAudio){
-currentAudio.play()
+currentAudio.play().catch(()=>{})
 }
 
 })
@@ -288,7 +297,6 @@ currentAudio.play()
 terraButton.addEventListener("click",()=>{
 
 modoAtual="terra"
-
 terraGroup.setAttribute("visible",true)
 relevoModel.setAttribute("visible",false)
 
@@ -297,7 +305,6 @@ relevoModel.setAttribute("visible",false)
 relevoButton.addEventListener("click",()=>{
 
 modoAtual="relevo"
-
 terraGroup.setAttribute("visible",false)
 relevoModel.setAttribute("visible",true)
 
