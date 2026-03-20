@@ -95,6 +95,7 @@ html, body {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
+  box-sizing: border-box;
 }
 
 .login-box button {
@@ -169,7 +170,7 @@ html, body {
       <h2>IDENTIFIQUE-SE</h2>
       
       <input type="text" id="username" placeholder="Nome">
-      <input type="password" id="password" placeholder="Ano">
+      <input type="text" id="password" placeholder="Ano/Série">
       
       <button onclick="login()">Entrar</button>
       
@@ -179,6 +180,7 @@ html, body {
 
 </div>
 
+<script src="alunoData.js"></script>
 <script>
 const audio = document.getElementById('bg-audio');
 
@@ -188,17 +190,15 @@ window.addEventListener('load', () => {
 });
 
 function login() {
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
+  const user = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error-msg");
 
-  const validUser = "aluno";
-  const validPass = "1234";
-
-  if (user === validUser && pass === validPass) {
+  if (user !== "" && pass !== "") {
+    salvarDadosAluno(user, pass);
     window.location.href = "escolha.html";
   } else {
-    errorMsg.textContent = "Usuário ou senha incorretos.";
+    errorMsg.textContent = "Preencha nome e ano/série.";
   }
 }
 </script>
