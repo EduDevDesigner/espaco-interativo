@@ -158,6 +158,13 @@ device-orientation-permission-ui="enabled:false">
 <a-text value="PLEISTOCENO" align="center" color="#00e5ff" width="3" position="0 0.30 0"></a-text>
 <a-text value="2,58 milhoes – 11.700 anos" align="center" color="#ffffff" width="3" position="0 0.5 0"></a-text>
 </a-entity>
+  
+  <!-- Luz ambiente: clareia toda a cena -->
+    <a-light type="ambient" color="#ffffff" intensity="6.0"></a-light>
+    <!-- Luz principal: simula o sol e gera sombra -->
+    <a-light type="directional" color="#ffffff" intensity="3.2" position="3 -6 4" castShadow="true" shadow-mapWidth="2048" shadow-mapHeight="2048"
+      shadow-camera-top="10" shadow-camera-bottom="-10" shadow-camera-left="-10" shadow-camera-right="10" shadow-camera-near="1"
+      shadow-camera-far="30" shadow-bias="-0.0005"></a-light>    
 
 </a-entity>
   
@@ -170,8 +177,7 @@ device-orientation-permission-ui="enabled:false">
     <!-- Luz principal: simula o sol e gera sombra -->
     <a-light type="directional" color="#ffffff" intensity="3.2" position="3 -6 4" castShadow="true" shadow-mapWidth="2048" shadow-mapHeight="2048"
       shadow-camera-top="10" shadow-camera-bottom="-10" shadow-camera-left="-10" shadow-camera-right="10" shadow-camera-near="1"
-      shadow-camera-far="30" shadow-bias="-0.0005"></a-light>
-    
+      shadow-camera-far="30" shadow-bias="-0.0005"></a-light>    
 </a-entity>
   
   
