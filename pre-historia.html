@@ -239,8 +239,20 @@ target.addEventListener("targetFound",()=>{
 message.classList.add("hidden")
 
 audioButton.style.display="block"
+
+/* 🔥 ALTERAÇÃO MÍNIMA AQUI */
+if(index === 0){
+  terraButton.style.display="block"
+  relevoButton.style.display="block"
+}else{
+  terraButton.style.display="none"
+  relevoButton.style.display="none"
+}
+
+/* 🔴 REMOVA ESSAS LINHAS (ou deixe comentadas)
 terraButton.style.display="block"
 relevoButton.style.display="block"
+*/
 
 activeTargetIndex=index
 currentAudio=document.getElementById("audio"+index)
