@@ -240,7 +240,6 @@ message.classList.add("hidden")
 
 audioButton.style.display="block"
 
-/* 🔥 ALTERAÇÃO MÍNIMA AQUI */
 if(index === 0){
   terraButton.style.display="block"
   relevoButton.style.display="block"
@@ -249,27 +248,18 @@ if(index === 0){
   relevoButton.style.display="none"
 }
 
-/* 🔴 REMOVA ESSAS LINHAS (ou deixe comentadas)
-terraButton.style.display="block"
-relevoButton.style.display="block"
-*/
-
 activeTargetIndex=index
 currentAudio=document.getElementById("audio"+index)
 
 if(lastTargetIndex!==null && lastTargetIndex!==index){
-
 document.querySelectorAll("audio").forEach(a=>{
 a.pause()
 a.currentTime=0
 })
-
 }
 
-if(pausedByTracking && currentAudio){
-currentAudio.play().catch(()=>{})
+/* 🔥 AQUI FOI REMOVIDO O AUTOPLAY */
 pausedByTracking=false
-}
 
 if(modoAtual==="terra"){
 terraGroup.setAttribute("visible",true)
@@ -303,27 +293,21 @@ lastTargetIndex=activeTargetIndex
 })
 
 audioButton.addEventListener("click",()=>{
-
 if(currentAudio){
 currentAudio.play().catch(()=>{})
 }
-
 })
 
 terraButton.addEventListener("click",()=>{
-
 modoAtual="terra"
 terraGroup.setAttribute("visible",true)
 relevoModel.setAttribute("visible",false)
-
 })
 
 relevoButton.addEventListener("click",()=>{
-
 modoAtual="relevo"
 terraGroup.setAttribute("visible",false)
 relevoModel.setAttribute("visible",true)
-
 })
 
 </script>
