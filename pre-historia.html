@@ -116,8 +116,8 @@ device-orientation-permission-ui="enabled:false">
 <a-asset-item id="relevo" src="Modelos/relevo.glb"></a-asset-item>
 <a-asset-item id="caverna" src="Modelos/Caverna.glb"></a-asset-item>
 <a-asset-item id="cacador" src="Modelos/Cacador.glb"></a-asset-item>
-<a-asset-item id="objeto3" src="Modelos/Mamute.glb"></a-asset-item>
-<a-asset-item id="objeto4" src="Modelos/objeto4.glb"></a-asset-item>
+<a-asset-item id="mamute" src="Modelos/Mamute.glb"></a-asset-item>
+<a-asset-item id="smilodon" src="Modelos/Smilodon.glb"></a-asset-item>
 <a-asset-item id="objeto5" src="Modelos/objeto5.glb"></a-asset-item>
 <a-asset-item id="objeto6" src="Modelos/objeto6.glb"></a-asset-item>
 <a-asset-item id="objeto7" src="Modelos/objeto7.glb"></a-asset-item>
@@ -129,7 +129,7 @@ device-orientation-permission-ui="enabled:false">
 
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
     
-<!-- TRACK 1 -->
+<!-- TRACK 0 -->
 <a-entity mindar-image-target="targetIndex:0">
 
 <a-entity id="terraGroup" visible="false">
@@ -168,9 +168,10 @@ device-orientation-permission-ui="enabled:false">
 
 </a-entity>
   
-<!-- TRACK 2 -->
+<!-- TRACK 1 -->
 <a-entity mindar-image-target="targetIndex: 1">
 <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#base"></a-gltf-model>
+<a-gltf-model rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#caverna"></a-gltf-model>
 <a-gltf-model rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#caverna"></a-gltf-model>
 <!-- Luz ambiente: clareia toda a cena -->
     <a-light type="ambient" color="#ffffff" intensity="6.0"></a-light>
@@ -182,31 +183,33 @@ device-orientation-permission-ui="enabled:false">
   
   
   
-<!-- TRACK 3 -->
+<!-- TRACK 2 -->
 <a-entity mindar-image-target="targetIndex: 2">
-<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto3"></a-gltf-model>
+<a-gltf-model rotation="90 0 0 " position="0 0 0" scale="0.8 0.8 0.8" src="#base"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#mamute"></a-gltf-model>
+<a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#smilodon"></a-gltf-model>
 </a-entity>
-<!-- TRACK 4 -->
+<!-- TRACK 3 -->
 <a-entity mindar-image-target="targetIndex: 3">
 <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto4"></a-gltf-model>
 </a-entity>
-<!-- TRACK 5 -->
+<!-- TRACK 4 -->
 <a-entity mindar-image-target="targetIndex: 4">
 <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto5"></a-gltf-model>
 </a-entity>
-<!-- TRACK 6 -->
+<!-- TRACK 5 -->
 <a-entity mindar-image-target="targetIndex: 5">
 <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto6"></a-gltf-model>
 </a-entity>
-<!-- TRACK 7 -->
+<!-- TRACK 6 -->
 <a-entity mindar-image-target="targetIndex: 6">
 <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto7"></a-gltf-model>
 </a-entity>
-<!-- TRACK 8 -->
+<!-- TRACK 7 -->
 <a-entity mindar-image-target="targetIndex: 7">
 <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto8"></a-gltf-model>
 </a-entity>
-<!-- TRACK 9 -->
+<!-- TRACK 8 -->
 <a-entity mindar-image-target="targetIndex: 8">
 <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#objeto9"></a-gltf-model>
 </a-entity>
